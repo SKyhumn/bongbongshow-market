@@ -11,10 +11,13 @@ import java.util.Map;
 import java.util.Random;
 
 @RestController
-@RequiredArgsConstructor
 @RequestMapping("/api")
 public class GameController {
     private final GameService gameService;
+
+    public GameController(GameService gameService){
+        this.gameService = gameService;
+    }
 
     @PostMapping("/play")
     public Map<String, String> playGame(@RequestBody Map<String, String> payload){
