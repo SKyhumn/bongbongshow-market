@@ -18,7 +18,7 @@ public class GameController {
     public GameController(GameService gameService){
         this.gameService = gameService;
     }
-
+    
     @PostMapping("/play")
     public Map<String, String> playGame(@RequestBody Map<String, String> payload){
         String userMove = payload.get("userMove");

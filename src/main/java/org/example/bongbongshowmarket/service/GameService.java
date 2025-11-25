@@ -21,6 +21,15 @@ public class GameService {
       );
   }
 
+  public Map<String, String> testPlayGames(String userMove, String aiMove){
+      String result = determineWinner(userMove, aiMove);
+      return Map.of(
+              "result", result,
+              "userMove", userMove,
+              "aiMove", aiMove
+      );
+  }
+
     private String determineWinner(String user, String ai){
         if(user.equals(ai)){
             return "dawn"; // 비김

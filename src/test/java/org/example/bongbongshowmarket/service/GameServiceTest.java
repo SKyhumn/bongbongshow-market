@@ -20,6 +20,15 @@ public class GameServiceTest {
     private final List<String> possibleMoves = Arrays.asList("rock", "scissors", "paper");
 
     @Test
+    @DisplayName("승패 테스트")
+    void testDetermineWinner_Direct(){
+        Map<String, String> result = gameService.testPlayGames("rock", "scissors");
+        assertThat(result.get("userMove")).isEqualTo("rock");
+        assertThat(result.get("aiMove")).isEqualTo("scissors");
+        assertThat(result.get("result")).isEqualTo("win");
+    }
+
+    @Test
     @DisplayName("가위바위보 게임 결과 테스트")
     void testPlayGame_ResultFormat(){
         String userMove = "rock";
