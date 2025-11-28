@@ -12,6 +12,10 @@ public class GameService {
     private final String[] moves = {"rock", "scissors", "paper"}; // 주먹, 가위, 보 설정
 
   public Map<String, String> playGame(String userMove){
+      if(userMove == null){
+          throw new IllegalArgumentException("UserMove cannot be null");
+      }
+
       String aiMove = moves[random.nextInt(moves.length)];
       String result = determineWinner(userMove, aiMove);
       return Map.of(
@@ -22,6 +26,10 @@ public class GameService {
   }
 
   public Map<String, String> testPlayGames(String userMove, String aiMove){
+      if(userMove == null){
+          throw new IllegalArgumentException("UserMove cannot be null");
+      }
+
       String result = determineWinner(userMove, aiMove);
       return Map.of(
               "result", result,
@@ -32,7 +40,7 @@ public class GameService {
 
     private String determineWinner(String user, String ai){
         if(user.equals(ai)){
-            return "dawn"; // 비김
+            return "draw"; // 비김
         }
         // 사용자가 이기는 경우
         if ((user.equals("rock") && ai.equals("scissors")) ||

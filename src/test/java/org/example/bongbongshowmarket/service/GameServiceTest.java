@@ -36,7 +36,7 @@ public class GameServiceTest {
         assertThat(result).containsKeys("result", "userMove", "aiMove"); // Map 안에 이것들이 있어야함
         assertThat(result.get("userMove")).isEqualTo(userMove); // result에서 얻어온 userMove와 내가 설정한 userMove가 같아야함
         assertThat(possibleMoves).contains(result.get("aiMove")); // Ai가 낼수 있는 값인지 확인
-        assertThat(Arrays.asList("win", "lose", "dawn")).contains(result.get("result")); // result가 win, lose, dawn중 하나인지 확인
+        assertThat(Arrays.asList("win", "lose", "draw")).contains(result.get("result")); // result가 win, lose, dawn중 하나인지 확인
     }
 
     @Test
@@ -70,7 +70,7 @@ public class GameServiceTest {
     @Test
     @DisplayName("null 입력시 예외가 발생하는지 테스트")
     void testNullInput(){
-        org.junit.jupiter.api.Assertions.assertThrows(NullPointerException.class, () ->
+        org.junit.jupiter.api.Assertions.assertThrows(IllegalArgumentException.class, () ->
             gameService.testPlayGames(null, "rock") //NullPointerException 뜨는지 확인
         );
     }
