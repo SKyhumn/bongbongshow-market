@@ -71,7 +71,7 @@ public class GameServiceTest {
     @DisplayName("null 입력시 예외가 발생하는지 테스트")
     void testNullInput(){
         org.junit.jupiter.api.Assertions.assertThrows(IllegalArgumentException.class, () ->
-            gameService.testPlayGames(null, "rock") //NullPointerException 뜨는지 확인
+            gameService.testPlayGames(null, "rock") //IllegalArgumentException으로 수정 완료함
         );
     }
 }
