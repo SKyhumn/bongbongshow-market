@@ -11,7 +11,7 @@ import java.util.Map;
 import java.util.Random;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/common")
 public class GameController {
     private final GameService gameService;
 

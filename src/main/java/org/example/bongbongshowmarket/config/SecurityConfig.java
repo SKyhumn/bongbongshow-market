@@ -41,10 +41,9 @@ public class SecurityConfig {
                 )
 
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/api/signup", "/api/signin", "/api/play").permitAll()
-                        .requestMatchers("/api/user/**").hasRole("USER")
+                        .requestMatchers("/api/public/**").permitAll()
+                        .requestMatchers("/api/user/**").hasAnyRole("USER", "ADMIN")
                         .requestMatchers("api/admin/**").hasRole("ADMIN")
-                        .requestMatchers("/api/common/**").hasAnyRole("USER", "ADMIN")
                         .anyRequest().authenticated()
                 )
                 .addFilterBefore(new JwtAuthenticationFilter(tokenProvider),

@@ -21,4 +21,7 @@ public class UserEntity{
 
     @Enumerated(EnumType.STRING)
     private Role role;
+
+    @Column(name = "name", nullable = false)
+    private String name;
 }

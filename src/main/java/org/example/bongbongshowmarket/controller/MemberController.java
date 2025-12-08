@@ -1,6 +1,8 @@
 package org.example.bongbongshowmarket.controller;
 
 import lombok.RequiredArgsConstructor;
+import org.apache.coyote.Response;
+import org.example.bongbongshowmarket.dto.LoginDto;
 import org.example.bongbongshowmarket.dto.MemberDto;
 import org.example.bongbongshowmarket.entitiy.UserEntity;
 import org.example.bongbongshowmarket.service.MemberService;
@@ -11,11 +13,34 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Map;
+
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/public")
 @RequiredArgsConstructor
 public class MemberController {
     private final MemberService service;
+
+    @PostMapping("/send-code")
+    public ResponseEntity<String> sendCode(@RequestBody Map<String, String> body){
+        String email = body.get("email");
+        service.sendCodeToEmail(email);
+        return ResponseEntity.ok("이메일로 인증코드를 전송하였습니다");
+    }
+
+    @PostMapping("/verify-code")
+    public ResponseEntity<String> verifyCode(@RequestBody Map<String, String> body) {
+        String email = body.get("email");
+        String code = body.get("code");
+
+        boolean isVerified = service.verifyCode(email, code);
+
+        if (isVerified) {
+            return ResponseEntity.ok("인증 성공!");
+        } else {
+            return ResponseEntity.badRequest().body("인증 실패: 코드가 일치하지 않거나 만료되었습니다.");
+        }
+    }
 
     @PostMapping("/signup")
     public ResponseEntity<String> createUser(@RequestBody MemberDto dto){
@@ -24,7 +49,7 @@ public class MemberController {
     }
 
     @PostMapping("/signin")
-    public ResponseEntity<?> signin(@RequestBody MemberDto dto){
+    public ResponseEntity<?> signin(@RequestBody LoginDto dto){
         return ResponseEntity.ok(service.signin(dto));
     }
 }
