@@ -1,17 +1,12 @@
 package org.example.bongbongshowmarket.controller;
 
 import lombok.RequiredArgsConstructor;
-import org.apache.coyote.Response;
 import org.example.bongbongshowmarket.dto.LoginDto;
 import org.example.bongbongshowmarket.dto.MemberDto;
-import org.example.bongbongshowmarket.entitiy.UserEntity;
 import org.example.bongbongshowmarket.service.MemberService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.Map;
 
@@ -20,6 +15,11 @@ import java.util.Map;
 @RequiredArgsConstructor
 public class MemberController {
     private final MemberService service;
+
+    @GetMapping("/signin")
+    public ModelAndView signInPage(){
+        return new ModelAndView("signin");
+    }
 
     @PostMapping("/send-code")
     public ResponseEntity<String> sendCode(@RequestBody Map<String, String> body){

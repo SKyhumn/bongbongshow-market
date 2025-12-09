@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>봉봉쇼 마켓 - 회원가입/로그인</title>
+    <style>
+        body { font-family: 'Segoe UI', sans-serif; padding: 40px; background-color: #f9f9f9; display: flex; justify-content: center; gap: 50px;}
+        .card { background: white; padding: 30px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); width: 350px; height: fit-content; }
+        h2 { margin-top: 0; color: #333; text-align: center; margin-bottom: 20px; }
+
+        .input-group { margin-bottom: 15px; }
+        label { display: block; margin-bottom: 5px; font-weight: bold; font-size: 0.9em; color: #555; }
+        input { width: 100%; padding: 10px; margin-bottom: 5px; border: 1px solid #ddd; border-radius: 6px; box-sizing: border-box; }
+
+        /* 버튼 스타일 */
+        button { width: 100%; padding: 12px; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; transition: 0.2s; }
+        .btn-primary { background-color: #007bff; color: white; margin-top: 10px; }
+        .btn-primary:hover { background-color: #0056b3; }
+
+        .btn-secondary { background-color: #6c757d; color: white; font-size: 0.9em; }
+        .btn-secondary:hover { background-color: #5a6268; }
+
+        /* 인증 확인 모드일 때 버튼 색상 변경용 클래스 */
+        .btn-verify { background-color: #28a745; color: white; }
+        .btn-verify:hover { background-color: #218838; }
+
+        .response-box { margin-top: 20px; padding: 10px; background: #eee; border-radius: 4px; font-size: 0.85em; white-space: pre-wrap; word-break: break-all; min-height: 40px;}
+    </style>
+</head>
+<body>
+
+<div class="card">
+    <h2>회원가입</h2>
+
+    <div class="input-group">
+        <label>이름 (Name)</label>
+        <input type="text" id="reg-name" placeholder="홍길동">
+    </div>
+
+    <div class="input-group">
+        <label>이메일 (Email)</label>
+        <input type="email" id="reg-email" placeholder="example@naver.com">
+
+        <input type="text" id="reg-code" placeholder="인증번호 6자리" style="margin-top: 5px;">
+        <button id="btn-email-action" class="btn-secondary" onclick="handleEmailAction()">인증번호 전송</button>
+    </div>
+
+    <div class="input-group">
+        <label>비밀번호 (Password)</label>
+        <input type="password" id="reg-password" placeholder="비밀번호 입력">
+    </div>
+
+    <button class="btn-primary" onclick="signup()">회원가입 완료</button>
+</div>
+
+<div class="card">
+    <h2>로그인</h2>
+    <div class="input-group">
+        <label>이메일</label>
+        <input type="email" id="login-email">
+    </div>
+    <div class="input-group">
+        <label>비밀번호</label>
+        <input type="password" id="login-password">
+    </div>
+    <button class="btn-primary" onclick="signin()">로그인</button>
+
+    <div class="response-box" id="login-result">로그인 결과 토큰값 대기중...</div>
+</div>
+
+<script>
+    // API 기본 경로
+    const BASE_URL = '/api/public';
+
+    // 이메일 버튼 상태 관리 (true면 '인증 확인' 모드, false면 '전송' 모드)
+    let isVerifyMode = false;
+
+    // 1. 이메일 버튼 하나로 전송/검증 로직 분기 처리
+    async function handleEmailAction() {
+        const email = document.getElementById('reg-email').value;
+        const codeInput = document.getElementById('reg-code');
+        const btn = document.getElementById('btn-email-action');
+
+        if (!email) {
+            alert("이메일을 입력해주세요.");
+            return;
+        }
+
+        if (!isVerifyMode) {
+            // --- [모드: 인증번호 전송] ---
+            try {
+                btn.innerText = "전송 중...";
+                btn.disabled = true;
+
+                const response = await fetch(`${BASE_URL}/send-code`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email: email })
+                });
+
+                if (response.ok) {
+                    alert("이메일로 인증코드를 전송하였습니다.");
+                    // 상태 변경 -> 인증 확인 모드로
+                    isVerifyMode = true;
+                    btn.innerText = "인증 확인";
+                    btn.classList.add('btn-verify'); // 초록색으로 변경
+                    btn.classList.remove('btn-secondary');
+                    codeInput.focus();
+                } else {
+                    const errorText = await response.text();
+                    alert("전송 실패: " + errorText);
+                }
+            } catch (e) {
+                alert("서버 오류 발생");
+                console.error(e);
+            } finally {
+                btn.disabled = false;
+                if (!isVerifyMode) btn.innerText = "인증번호 전송";
+            }
+
+        } else {
+            // --- [모드: 인증 확인] ---
+            const code = codeInput.value;
+            if (!code) {
+                alert("인증번호를 입력해주세요.");
+                return;
+            }
+
+            try {
+                const response = await fetch(`${BASE_URL}/verify-code`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email: email, code: code })
+                });
+
+                if (response.ok) {
+                    alert("인증 성공!");
+                    // 인증 완료 후 버튼 비활성화 (선택 사항)
+                    btn.innerText = "인증 완료됨";
+                    btn.disabled = true;
+                } else {
+                    // 요청하신 실패 시나리오 구현
+                    alert("인증에 실패 했습니다.");
+
+                    // 다시 메일 보내는 상태로 원복
+                    isVerifyMode = false;
+                    btn.innerText = "인증번호 전송";
+                    btn.classList.remove('btn-verify');
+                    btn.classList.add('btn-secondary');
+                    codeInput.value = ''; // 코드 입력창 초기화
+                }
+            } catch (e) {
+                console.error(e);
+                alert("인증 처리 중 오류 발생");
+            }
+        }
+    }
+
+    // 2. 회원가입 요청
+    async function signup() {
+        const data = {
+            email: document.getElementById('reg-email').value,
+            password: document.getElementById('reg-password').value,
+            name: document.getElementById('reg-name').value // DTO의 name 필드와 매칭
+        };
+
+        // 유효성 검사 (간단)
+        if(!data.email || !data.password || !data.name) {
+            alert("모든 필드를 입력해주세요.");
+            return;
+        }
+
+        try {
+            const response = await fetch(`${BASE_URL}/signup`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data)
+            });
+
+            if (response.ok) {
+                alert("회원가입 성공!");
+                window.location.reload(); // 페이지 새로고침
+            } else {
+                // 서버에서 throw new RuntimeException 한 메시지가 텍스트로 옴
+                const msg = await response.text();
+                // JSON 형태일 수도 있으니 안전하게 처리하려면 try-catch로 parse
+                try {
+                    const jsonMsg = JSON.parse(msg);
+                    alert("가입 실패: " + (jsonMsg.message || msg));
+                } catch {
+                    alert("가입 실패: " + msg);
+                }
+            }
+        } catch (e) {
+            alert("오류가 발생했습니다.");
+        }
+    }
+
+    // 3. 로그인 요청
+    async function signin() {
+        const data = {
+            email: document.getElementById('login-email').value,
+            password: document.getElementById('login-password').value
+        };
+
+        try {
+            const response = await fetch(`${BASE_URL}/signin`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data)
+            });
+
+            if (response.ok) {
+                const tokens = await response.json();
+                document.getElementById('login-result').innerText =
+                    "로그인 성공!\n\nAccess Token: " + tokens.accessToken.substring(0, 20) + "...\nRefresh Token: " + tokens.refreshToken.substring(0, 20) + "...";
+                console.log(tokens);
+                alert("로그인 성공");
+            } else {
+                alert("로그인 실패: 아이디나 비번을 확인하세요.");
+                document.getElementById('login-result').innerText = "로그인 실패";
+            }
+        } catch (e) {
+            alert("서버 연결 오류");
+        }
+    }
+</script>
+</body>
+</html>

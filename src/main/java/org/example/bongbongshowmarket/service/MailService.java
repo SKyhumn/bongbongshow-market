@@ -9,6 +9,8 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 
+import java.io.UnsupportedEncodingException;
+
 @Slf4j
 @Service
 @RequiredArgsConstructor
@@ -22,8 +24,9 @@ public class MailService {
         MimeMessage message = javaMailSender.createMimeMessage();
 
         try{
+            String personal = "봉봉마켓";
             MimeMessageHelper helper = new MimeMessageHelper(message, true, "UTF-8");
-            helper.setFrom(senderEmail);
+            helper.setFrom(senderEmail ,personal);
             helper.setTo(email);
             helper.setSubject("[가위바위보게임] 회원가입 인증번호");
 
@@ -36,6 +39,8 @@ public class MailService {
         } catch (MessagingException e){
             log.error("메시지", e);
             throw new RuntimeException("이메일 발송 불가");
+        } catch (UnsupportedEncodingException e) {
+            throw new RuntimeException(e);
         }
     }
 }
