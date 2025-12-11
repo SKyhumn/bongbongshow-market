@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>봉봉마켓 - 환영합니다</title>
+    <style>
+        body { font-family: 'Segoe UI', sans-serif; background-color: #f0f2f5; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
+        .card { background: white; padding: 40px; border-radius: 15px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); text-align: center; width: 400px; }
+        h1 { color: #333; margin-bottom: 10px; }
+        p { color: #666; font-size: 1.1em; margin-bottom: 30px; }
+
+        .result-box {
+            background-color: #e8f5e9;
+            color: #2e7d32;
+            padding: 15px;
+            border-radius: 8px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            border: 1px solid #c8e6c9;
+        }
+
+        .btn-logout {
+            background-color: #ff4757;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            font-size: 1em;
+            cursor: pointer;
+            transition: 0.2s;
+            width: 100%;
+        }
+        .btn-logout:hover { background-color: #ff6b81; }
+    </style>
+</head>
+<body>
+
+<div class="card">
+    <h1>🎉 환영합니다!</h1>
+    <p>로그인에 성공하셨습니다.</p>
+
+    <div id="server-message" class="result-box">
+        데이터 로딩 중...
+    </div>
+
+    <button class="btn-logout" onclick="logout()">로그아웃</button>
+</div>
+
+<script>
+    // 페이지가 열리자마자 실행됨
+    window.onload = async function() {
+        try {
+            // 1. 쿠키를 들고 /api/user/hello 에 노크해봄
+            const response = await fetch('/api/user/hello', {
+                method: 'GET'
+                // 헤더에 토큰 넣을 필요 없음! (브라우저가 알아서 쿠키 챙겨감)
+            });
+
+            // 2. 서버가 "OK(200)" 하면 메시지 보여줌
+            if (response.ok) {
+                const text = await response.text();
+                document.getElementById('server-message').innerText =
+                    "서버 응답: " + text;
+            } else {
+                // 3. 실패하면(403 등) 쫓아냄
+                alert("로그인이 필요합니다!");
+                window.location.href = '/index.html'; // 로그인 페이지로 튕기기
+            }
+        } catch (e) {
+            console.error(e);
+            document.getElementById('server-message').innerText = "서버 연결 실패";
+        }
+    };
+
+    // 로그아웃 함수
+    async function logout() {
+        try {
+            // 아까 만든 로그아웃 컨트롤러 호출 (쿠키 삭제용)
+            await fetch('/api/public/logout', { method: 'POST' });
+
+            alert("로그아웃 되었습니다 👋");
+            window.location.href = '/api/public/signin'; // 로그인 화면으로 이동
+        } catch (e) {
+            alert("로그아웃 중 오류 발생");
+        }
+    }
+</script>
+
+</body>
+</html>

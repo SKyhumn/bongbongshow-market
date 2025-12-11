@@ -4,6 +4,7 @@ import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.example.bongbongshowmarket.dto.TokenDto;
 import org.example.bongbongshowmarket.entitiy.Role;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -26,22 +27,28 @@ public class JwtTokenProvider {
         this.key = Keys.hmacShaKeyFor(securityKey.getBytes(StandardCharsets.UTF_8));
     }
 
-    public String createToken(String email, Role role, long expireTime){
+    public TokenDto createToken(String email, Role role, long expireTime){
         Date now = new Date();
 
-        return Jwts.builder()
+        String accessToken = Jwts.builder()
                 .setSubject(email)
                 .claim("role", role.name())
                 .setIssuedAt(now)
                 .setExpiration(new Date(now.getTime() + expireTime))
                 .signWith(key)
                 .compact();
+
+        return TokenDto.builder()
+                .grantType("Bearer")
+                .accessToken(accessToken)
+                .refreshToken(null)
+                .build();
     }
 
-    public String createAccessToken(String email, Role role){
+    public TokenDto createAccessToken(String email, Role role){
         return createToken(email, role, ACCESS_TOKEN_VALID);
     }
-    public String createRefreshToken(String email, Role role){
+    public TokenDto createRefreshToken(String email, Role role){
         return createToken(email, role, REFRESH_TOKEN_VALID);
     }
 

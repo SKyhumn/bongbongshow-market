@@ -1,12 +1,16 @@
 package org.example.bongbongshowmarket.service;
 
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.Cookie;
 import lombok.RequiredArgsConstructor;
 import org.example.bongbongshowmarket.dto.LoginDto;
 import org.example.bongbongshowmarket.dto.MemberDto;
+import org.example.bongbongshowmarket.dto.TokenDto;
 import org.example.bongbongshowmarket.entitiy.Role;
 import org.example.bongbongshowmarket.entitiy.UserEntity;
 import org.example.bongbongshowmarket.jwt.JwtTokenProvider;
 import org.example.bongbongshowmarket.repository.UserRepository;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -78,19 +82,26 @@ public class MemberService {
         memoryStore.remove("Verified:" + member.getEmail());
     }
 
-    public Map<String, String> signin(LoginDto dto){
-        UserEntity entity = repository.findByEmail(dto.getEmail())
-                .orElseThrow(() -> new RuntimeException("이메일을 찾을 수 없습니다"));
-        if(!passwordEncoder.matches(dto.getPassword(), entity.getPassword())) {
-            throw new RuntimeException("비밀번호가 일치 하지 않습니다");
-        }
-        String access = tokenProvider.createAccessToken(entity.getEmail(), entity.getRole());
-        String refresh = tokenProvider.createRefreshToken(entity.getEmail(), entity.getRole());
+    public String signin(LoginDto dto, HttpServletResponse response){
+        UserEntity user = repository.findByEmail(dto.getEmail())
+                .orElseThrow(() -> new IllegalArgumentException("가입되지 않은 이메일 입니다"));
 
-        Map<String, String> tokens = new HashMap<>();
-        tokens.put("accessToken", access);
-        tokens.put("refreshToken", refresh);
-        return tokens;
+        if(!passwordEncoder.matches(dto.getPassword(), user.getPassword())){
+            throw new IllegalArgumentException("비밀번호가 일치하지 않습니다");
+        }
+        long expireTimeMs = 1000 * 60 * 60;
+
+        TokenDto Tokendto = tokenProvider.createToken(user.getEmail(), user.getRole(), expireTimeMs);
+
+        Cookie cookie = new Cookie("accessToken", Tokendto.getAccessToken());
+        cookie.setHttpOnly(true);  // 자바스크립트 해킹 방지
+        cookie.setSecure(true);    // HTTPS 필수
+        cookie.setPath("/");       // 모든 곳에서 사용
+        cookie.setMaxAge(60 * 60);
+
+        response.addCookie(cookie);
+
+        return "로그인 성공! 쿠키 발급 완료";
     }
 
     private String createCode() {

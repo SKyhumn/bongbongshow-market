@@ -1,5 +1,7 @@
 package org.example.bongbongshowmarket.controller;
 
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.example.bongbongshowmarket.dto.LoginDto;
 import org.example.bongbongshowmarket.dto.MemberDto;
@@ -49,7 +51,18 @@ public class MemberController {
     }
 
     @PostMapping("/signin")
-    public ResponseEntity<?> signin(@RequestBody LoginDto dto){
-        return ResponseEntity.ok(service.signin(dto));
+    public ResponseEntity<?> signin(@RequestBody LoginDto dto, HttpServletResponse response){
+        String resultMessage = service.signin(dto, response);
+        return ResponseEntity.ok(resultMessage);
+    }
+
+    @PostMapping("/logout")
+    public ResponseEntity<?> logout(HttpServletResponse response){
+        Cookie cookie = new Cookie("accessToken", null);
+        cookie.setMaxAge(0);
+        cookie.setPath("/");
+        response.addCookie(cookie);
+
+        return ResponseEntity.ok("로그아웃 되었습니다");
     }
 }

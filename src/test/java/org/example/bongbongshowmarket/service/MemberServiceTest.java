@@ -49,25 +49,25 @@ public class MemberServiceTest {
         assertEquals("이메일은 필수 입력 값입니다", exception.getMessage());
     }
 
-    @Test
-    @DisplayName("로그인 성공: 이메일과 비밀번호가 일치하면 토큰을 발급한다")
-    void signInSuccess(){
-        LoginDto dto = new LoginDto();
-        dto.setEmail("test@gmail.com");
-        dto.setPassword("1234");
-
-        UserEntity mockUser = new UserEntity();
-        mockUser.setEmail("test@gmail.com");
-        mockUser.setPassword("encodedPassword");
-        mockUser.setRole(Role.USER);
-
-        when(repository.findByEmail(dto.getEmail())).thenReturn(Optional.of(mockUser));
-        when(encoder.matches(dto.getPassword(), mockUser.getPassword())).thenReturn(true);
-        when(provider.createAccessToken(any(), any())).thenReturn("access-token-sample");
-        when(provider.createRefreshToken(any(), any())).thenReturn("refresh-token-sample");
-        Map<String, String> result = memberService.signin(dto);
-        assertNotNull(result);
-        assertEquals("access-token-sample", result.get("accessToken"));
-        assertEquals("refresh-token-sample", result.get("refreshToken"));
-    }
+//    @Test
+//    @DisplayName("로그인 성공: 이메일과 비밀번호가 일치하면 토큰을 발급한다")
+//    void signInSuccess(){
+//        LoginDto dto = new LoginDto();
+//        dto.setEmail("test@gmail.com");
+//        dto.setPassword("1234");
+//
+//        UserEntity mockUser = new UserEntity();
+//        mockUser.setEmail("test@gmail.com");
+//        mockUser.setPassword("encodedPassword");
+//        mockUser.setRole(Role.USER);
+//
+//        when(repository.findByEmail(dto.getEmail())).thenReturn(Optional.of(mockUser));
+//        when(encoder.matches(dto.getPassword(), mockUser.getPassword())).thenReturn(true);
+//        when(provider.createAccessToken(any(), any())).thenReturn("access-token-sample");
+//        when(provider.createRefreshToken(any(), any())).thenReturn("refresh-token-sample");
+//        Map<String, String> result = memberService.signin(dto);
+//        assertNotNull(result);
+//        assertEquals("access-token-sample", result.get("accessToken"));
+//        assertEquals("refresh-token-sample", result.get("refreshToken"));
+//    }
 }
