@@ -82,7 +82,7 @@ public class MemberService {
         memoryStore.remove("Verified:" + member.getEmail());
     }
 
-    public String signin(LoginDto dto, HttpServletResponse response){
+    public TokenDto signin(LoginDto dto, HttpServletResponse response){
         UserEntity user = repository.findByEmail(dto.getEmail())
                 .orElseThrow(() -> new IllegalArgumentException("가입되지 않은 이메일 입니다"));
 
@@ -101,7 +101,7 @@ public class MemberService {
 
         response.addCookie(cookie);
 
-        return "로그인 성공! 쿠키 발급 완료";
+        return Tokendto;
     }
 
     private String createCode() {

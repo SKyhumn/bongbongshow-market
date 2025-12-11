@@ -5,6 +5,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.example.bongbongshowmarket.dto.LoginDto;
 import org.example.bongbongshowmarket.dto.MemberDto;
+import org.example.bongbongshowmarket.dto.TokenDto;
 import org.example.bongbongshowmarket.service.MemberService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,6 +18,7 @@ import java.util.Map;
 @RequiredArgsConstructor
 public class MemberController {
     private final MemberService service;
+    private final MemberService memberService;
 
     @GetMapping("/signin")
     public ModelAndView signInPage(){
@@ -52,8 +54,8 @@ public class MemberController {
 
     @PostMapping("/signin")
     public ResponseEntity<?> signin(@RequestBody LoginDto dto, HttpServletResponse response){
-        String resultMessage = service.signin(dto, response);
-        return ResponseEntity.ok(resultMessage);
+        TokenDto tokenDto = memberService.signin(dto, response);
+        return ResponseEntity.ok(tokenDto);
     }
 
     @PostMapping("/logout")
