@@ -9,7 +9,7 @@ export default function Header(){
 
     return(
         <div id="header">
-          <h1>RSPUR</h1>
+          <h1>BBShowRanking</h1>
           <p onClick={goSignInPage}>로그인</p>
         </div>
     );

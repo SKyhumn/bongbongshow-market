@@ -1,9 +1,13 @@
 import axios from "axios";
+import Modal from "./Modal";
 import { useState } from "react";
+import type { VerifyProps } from "../types/VerifyProps";
 
-export default function Verify({value}:{value:string}){
+export default function Verify({value, onVerified}:VerifyProps){
     const [isGsmEmail, setIsGsmEmail]=useState<boolean|null>(null);
     const [code, setCode]=useState<string>('');
+    const [isModalOpen, setIsModalOpen]=useState<boolean>(false);
+    const [modalMessage, setModalMessage]=useState<string>('');
 
     const isEmailFulled:boolean=value.trim()!=="";
 
@@ -17,6 +21,8 @@ export default function Verify({value}:{value:string}){
 
         if(!isValidGsm){
             setIsGsmEmail(false);
+            setIsModalOpen(true);
+            setModalMessage('이메일을 다시 입력해주세요.');
             return
         }
         
@@ -37,6 +43,8 @@ export default function Verify({value}:{value:string}){
         } catch(err:any){
             console.log(err);
             setIsGsmEmail(false);
+            setIsModalOpen(true);
+            setModalMessage('이메일을 다시 입력해주세요.');
         }
     }
 
@@ -57,12 +65,14 @@ export default function Verify({value}:{value:string}){
                 withCredentials:true
             })
             console.log(res.data);
-            console.log("인증 성공")
+            console.log("인증 성공");
+            onVerified();
         } catch(err:any){
             console.log(err);
             setIsGsmEmail(false);
         }
     }
+
     return(
         <div className="verifying-box">
             <button
@@ -74,22 +84,27 @@ export default function Verify({value}:{value:string}){
             </button>
             {isGsmEmail!==null&&(
                 <div>
-                    <p className={isGsmEmail?"grey-text":"red-text"}>
-                        {isGsmEmail?"인증번호를 전송했습니다":"다시 입력해주세요."}
-                    </p>
-                    {isGsmEmail?(
-                    <div>
-                        <input
-                            type="text"
-                            value={code}
-                            placeholder="6자리 입력"
-                            onChange={(e)=>setCode(e.target.value)}
-                            className="verifying-input"
-                        />
-                        <button onClick={handleVerify} className="verifying-btn">인증하기</button>
-                    </div>):""}
+                    {isGsmEmail===true&&(
+                        <div>
+                            <p className="grey-text">인증번호를 전송했습니다</p>
+                            <input
+                                type="text"
+                                value={code}
+                                placeholder="6자리 입력"
+                                onChange={(e)=>setCode(e.target.value)}
+                                className="verifying-input"
+                            />
+                            <button onClick={handleVerify} className="verifying-btn">인증하기</button>
+                        </div>
+                    )}
                 </div>
             )}
+
+            <Modal 
+                message={modalMessage} 
+                isOpen={isModalOpen} 
+                func={()=>setIsModalOpen(false)}
+            />
         </div>
     );
 }
