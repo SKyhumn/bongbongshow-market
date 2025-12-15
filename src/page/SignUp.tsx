@@ -93,7 +93,7 @@ export default function SignUp(){
             <Modal
                 message={modalMessage}
                 isOpen={isModalOpen}
-                func={successed==true?success:failed}
+                func={successed===true?success:failed}
             />
         </div>
     );
