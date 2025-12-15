@@ -68,9 +68,7 @@ export default function SignUp(){
     }
 
     // 로그인 페이지로
-    const goSignInPage=()=>{
-        nav('/sign-in')
-    }
+    const goSignInPage=()=>nav('/sign-in');
 
     return(
         <div className="sign-up-page">
@@ -93,7 +91,7 @@ export default function SignUp(){
             <Modal
                 message={modalMessage}
                 isOpen={isModalOpen}
-                func={successed==true?success:failed}
+                func={successed===true?success:failed}
             />
         </div>
     );

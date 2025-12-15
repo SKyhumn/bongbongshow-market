@@ -44,7 +44,7 @@ export default function SignIn(){
                 }
             );
             console.log(res.data);
-            nav('/');
+            goHomePage();
         } catch(err:any){
             setModalMessage('로그인에 실패했습니다.');
             setIsModalOpen(true);
