@@ -2,6 +2,7 @@ package org.example.bongbongshowmarket.service;
 
 import lombok.RequiredArgsConstructor;
 import org.example.bongbongshowmarket.dto.RankDto;
+import org.example.bongbongshowmarket.dto.UserStatsDto;
 import org.example.bongbongshowmarket.entitiy.GameRecord;
 import org.example.bongbongshowmarket.entitiy.UserEntity;
 import org.example.bongbongshowmarket.repository.GameRecordRepository;
@@ -10,6 +11,8 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import org.springframework.data.domain.Pageable;
+import org.springframework.transaction.annotation.Transactional;
+
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -96,13 +99,58 @@ public class GameService {
 
         int rank = 1;
         for (Object[] result : results) {
-            String email = (String) result[0];
+            String name = (String) result[0];
             Long winCount = (Long) result[1];
 
             // 랭킹, 이메일, 승수 담기
-            rankingList.add(new RankDto(rank++, email, winCount));
+            rankingList.add(new RankDto(rank++, name, winCount));
         }
 
         return rankingList;
+    }
+
+    public List<RankDto> getAllRanking(){
+      List<Object[]> results = gameRecordRepository.findAllRankers();
+      List<RankDto> rankingList = new ArrayList<>();
+
+      int rank = 1;
+      for (Object[] result : results){
+          String name = (String) result[0];
+          Long winCount = (Long) result[1];
+
+          rankingList.add(new RankDto(rank++, name, winCount));
+      }
+
+      return rankingList;
+    }
+
+    @Transactional(readOnly = true)
+    public UserStatsDto getUserStats(String email) {
+      UserEntity user = userRepository.findByEmail(email)
+              .orElseThrow(() -> new IllegalArgumentException("유저가 존재하지 않습니다"));
+
+        Long win = gameRecordRepository.countByUserAndGameResult(user, "W");
+        Long lose = gameRecordRepository.countByUserAndGameResult(user,"L");
+        Long draw = gameRecordRepository.countByUserAndGameResult(user,"D");
+
+        List<Object[]> allRankers = gameRecordRepository.findAllRankers();
+        int myRank = 0;
+        int currentRank = 1;
+        for(Object[] row : allRankers){
+            String rankerName = (String) row[0];
+            if (rankerName.equals(user.getName())) {
+                myRank = currentRank;
+                break;
+            }
+            currentRank++;
+        }
+
+        return new UserStatsDto(
+                win,
+                lose,
+                draw,
+                myRank,
+                user.getProfileImage()
+        );
     }
 }

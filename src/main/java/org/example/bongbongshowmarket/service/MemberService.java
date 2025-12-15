@@ -9,11 +9,16 @@ import org.example.bongbongshowmarket.dto.TokenDto;
 import org.example.bongbongshowmarket.entitiy.Role;
 import org.example.bongbongshowmarket.entitiy.UserEntity;
 import org.example.bongbongshowmarket.jwt.JwtTokenProvider;
+import org.example.bongbongshowmarket.repository.GameRecordRepository;
 import org.example.bongbongshowmarket.repository.UserRepository;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
+import java.util.Base64;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
@@ -29,6 +34,7 @@ public class MemberService {
     private final PasswordEncoder passwordEncoder;
     private final MailService mailService;
     private final Map<String, String> memoryStore = new ConcurrentHashMap<>();
+    private final GameRecordRepository gameRecordRepository;
 
     public void sendCodeToEmail(String toEmail){
         if(repository.existsByEmail(toEmail)){
@@ -111,5 +117,28 @@ public class MemberService {
             key.append(random.nextInt(10));
         }
         return key.toString();
+    }
+
+    @Transactional
+    public void withdraw(String email){
+        UserEntity user = repository.findByEmail(email)
+                .orElseThrow(() -> new IllegalArgumentException("유저가 존재하지 않습니다"));
+
+        gameRecordRepository.deleteByUser(user);
+        repository.delete(user);
+    }
+
+    @Transactional
+    public void updateProfileImage(String email, MultipartFile file){
+        UserEntity user = repository.findByEmail(email)
+                .orElseThrow(() -> new IllegalArgumentException("유저가 존재하지 않습니다"));
+
+        try {
+            String base64Image = "data:" + file.getContentType() + ";base64," +
+                    Base64.getEncoder().encodeToString(file.getBytes());
+            user.setProfileImage(base64Image);
+        } catch (IOException e) {
+            throw new RuntimeException("이미지 업로드 중 오류가 발생했습니다.", e);
+        }
     }
 }

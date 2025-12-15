@@ -18,6 +18,10 @@ public class UserEntity{
 
     @Column(name = "password", nullable = false)
     private String password;
+    
+    @Lob
+    @Column(columnDefinition = "LONGTEXT")
+    private String profileImage;
 
     @Enumerated(EnumType.STRING)
     private Role role;

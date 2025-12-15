@@ -35,9 +35,4 @@ public class GameController {
 
         return gameService.playGame(userMove, userNo);
     }
-
-    @GetMapping("/ranking")
-    public ResponseEntity<?> getRanking() {
-        return ResponseEntity.ok(gameService.getTop10Ranking());
-    }
 }

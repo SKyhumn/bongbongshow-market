@@ -54,8 +54,12 @@ public class MemberController {
 
     @PostMapping("/signin")
     public ResponseEntity<?> signin(@RequestBody LoginDto dto, HttpServletResponse response){
-        TokenDto tokenDto = memberService.signin(dto, response);
-        return ResponseEntity.ok(tokenDto);
+        try {
+            TokenDto tokenDto = memberService.signin(dto, response);
+            return ResponseEntity.ok(tokenDto);
+        } catch (IllegalArgumentException e){
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
     }
 
     @PostMapping("/logout")
