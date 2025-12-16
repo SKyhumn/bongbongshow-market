@@ -2,176 +2,231 @@
 
 #header{
   display:flex;
-  align-items:center;
-  justify-content:space-between;
-  width:100%;
-  height:2rem;
-  background-color:rgb(89, 130, 255);
   position:fixed;
   top:0;
   left:0;
-  padding:2.5rem;
-  color:white;
+  width:100%;
+
+  align-items:center;
+  justify-content:space-between;
+
+  padding:0.4rem 2.5rem;
   box-sizing:border-box;
+
+  color:white;
+  background-color:rgb(89, 130, 255);
 }
+
 h1{
   font-family: "Gugi", sans-serif;
   font-weight:400;
   cursor:pointer;
 }
+
 #header p{
   cursor:pointer;
 }
+
 .sign-in-page, .sign-up-page{
   display:flex;
-  align-items:center;
-  justify-content:center;
   position:fixed;
   top:0;
   left:0;
   width:100%;
   height:100vh;
+
+  align-items:center;
+  justify-content:center;
 }
+
 .back-btn{
   position:absolute;
   top:5%;
   left:3%;
+
   cursor:pointer;
 }
+
 form{
-  box-shadow:0px 3px 15px rgb(222, 222, 222);
-  border-radius:0.5rem;
   width:22rem;
   height:fr;
+
   padding:2rem;
   padding-top:2rem;
+  border-radius:0.5rem;
+  box-shadow:0px 3px 15px rgb(222, 222, 222);
 }
+
 form h1{
+  margin-top:0;
+  margin-bottom:0;
+
   font-family:sans-serif;
   text-align:center;
   font-size:2.5rem;
   font-weight: 700;
-  margin-top:0;
-  margin-bottom:0;
 }
+
 form p{
   margin-bottom:0.3rem;
 }
+
 form input{
   width:97%;
   height:2.4rem;
+
   border:1px solid rgb(183, 183, 183);
   border-radius:4px;
   padding-left:0.5rem;
 }
+
 .email-box {
   position:relative;
   width:100%;
   max-width:97%;
 }
+
 .email-box input {
   width:100%;
   height:40px;
 }
+
 .password-box{
   position:relative;
   width:100%;
   max-width:97%;
   z-index:9;
 }
+
 .password-box input{
   width:100%;
   height:40px;
+
   margin-bottom:1rem;
 }
-span {
+
+span{
   position: absolute;
   right: 0%;
   top: 67%;
   transform: translateY(-50%);
+
   font-size: 16px;
+
   color: #777777;
 }
+
 .password-box img{
-  cursor:pointer;
-  width:1.3rem;
-  height:1.3rem;
   position:relative;
   bottom:0.4rem;
+  width:1.3rem;
+  height:1.3rem;
   z-index:10;
+
+  cursor:pointer;
 }
+
 button{
   display:block;
-  cursor:pointer;
-  margin-top:0.5rem;
   width:100%;
   height:2.5rem;
-  border-radius:4px;
-  border:none;
-  background-color:rgb(231, 231, 231);
-  color:rgb(0, 0, 0);
-  font-weight:700;
-  font-size:1rem;
+
   justify-content:center;
   align-items:center;
+
+  margin-top:0.5rem;
+  border-radius:4px;
+  border:none;
+
+  font-weight:700;
+  font-size:1rem;
+
+  color:rgb(0, 0, 0);
+  background-color:rgb(231, 231, 231);
+
+  cursor:pointer;
 }
+
 .verifying-box input{
   margin-top:0.5rem;
 }
+
 .verifying-input{
   width:65%;
 }
+
 .verifying-btn{
-  width:30%;
   float:right;
+  width:30%;
 }
+
 .blue-btn{
-  background-color:rgb(89, 130, 255);
   color:white;
+  background-color:rgb(89, 130, 255);
 }
+
 .forgot-password{
-  color:grey;
   font-size:0.8rem;
-  cursor: pointer;
   text-align:center;
+
+  color:grey;
+
+  cursor: pointer;
 }
+
 .red-text{
+  margin-top:0.4rem;
+
+  font-size:0.8rem;
+
   color:red;
-  font-size:0.8rem;
-  margin-top:0.4rem;
 }
+
 .grey-text{
-  color:#777;
-  font-size:0.8rem;
   margin-top:0.4rem;
+
+  font-size:0.8rem;
+ 
+  color:#777;
 }
+
 .modal-overlay{
   display:flex;
-  align-items:center;
-  justify-content:center;
-  z-index:15;
-  width:100%;
-  height:100vh;
-  background-color:rgba(0, 0, 0, .5);
   position:fixed;
   top:0;
   left:0;
+  width:100%;
+  height:100vh;
+  z-index:15;
+
+  align-items:center;
+  justify-content:center;
+  
+  background-color:rgba(0, 0, 0, .5);
 }
+
 .modal-content{
   width:22rem;
   height:10rem;
+
   padding:2rem;
-  background-color:white;
   border-radius:0.5rem;
+
+  background-color:white;
 }
+
 .modal-content h2{
-  text-align:center;
   position:relative;
   top:2rem;
+
+  text-align:center;
 }
+
 .modal-content .blue-btn{
-  cursor:pointer;
-  width:4rem;
   float:right;
+  width:4rem;
+  
   margin-top:3rem;
+
+  cursor:pointer;
 }
