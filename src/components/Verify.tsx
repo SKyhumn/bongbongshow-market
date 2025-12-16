@@ -8,6 +8,7 @@ export default function Verify({value, onVerified}:VerifyProps){
     const [code, setCode]=useState<string>('');
     const [isModalOpen, setIsModalOpen]=useState<boolean>(false);
     const [modalMessage, setModalMessage]=useState<string>('');
+    const [verified, setVerified]=useState<boolean>(false);
 
     const isEmailFulled:boolean=value.trim()!=="";
 
@@ -16,14 +17,17 @@ export default function Verify({value, onVerified}:VerifyProps){
         e.preventDefault();
         setIsGsmEmail(null);
 
-        const isNumber=/^\d{4}$/.test(value.slice(1,5));
-        const isValidGsm=value.charAt(0)==="s"&&value.length===6&&isNumber
+        const isNumber = /^\d{4}$/.test(value.slice(1,5));
+        const isValidGsm =
+            value.charAt(0) === "s" &&
+            value.length === 6 &&
+            isNumber;
 
         if(!isValidGsm){
             setIsGsmEmail(false);
             setIsModalOpen(true);
             setModalMessage('이메일을 다시 입력해주세요.');
-            return
+            return;
         }
         
         const data={
@@ -31,12 +35,15 @@ export default function Verify({value, onVerified}:VerifyProps){
         }
 
         try{
-            const res=await axios.post("https://bongbong-market.shop/api/public/send-code",data,{
-                headers:{
-                    "Content-Type":"application/json",
-                },
-                withCredentials:true
-            })
+            const res=await axios.post("https://bongbong-market.shop/api/public/send-code",
+                data,
+                {
+                    withCredentials:true,
+                    headers:{
+                        "Content-Type":"application/json",
+                    }
+                }
+            );
             console.log(res.data);
             console.log("인증코드 전송");
             setIsGsmEmail(true);
@@ -58,26 +65,34 @@ export default function Verify({value, onVerified}:VerifyProps){
         }
 
         try{
-            const res=await axios.post("https://bongbong-market.shop/api/public/verify-code",data,{
-                headers:{
-                    "Content-Type":"application/json"
-                },
-                withCredentials:true
-            })
+            const res=await axios.post("https://bongbong-market.shop/api/public/verify-code",
+                data,
+                {
+                    withCredentials:true,
+                    headers:{
+                        "Content-Type":"application/json"
+                    }
+                }
+            )
             console.log(res.data);
             console.log("인증 성공");
             onVerified();
+            verifiedTrue();
         } catch(err:any){
             console.log(err);
             setIsGsmEmail(false);
         }
     }
 
+    const verifiedTrue=()=>{
+        setVerified(true);
+        setIsGsmEmail(true);
+    }
     return(
         <div className="verifying-box">
             <button
                 onClick={receiveCode} 
-                disabled={isEmailFulled?false:true}
+                disabled={!isEmailFulled||verified}
                 className={isEmailFulled?"blue-btn":""} 
             >
                 인증번호 보내기
@@ -99,7 +114,7 @@ export default function Verify({value, onVerified}:VerifyProps){
                     )}
                 </div>
             )}
-
+            {verified&&<p className="grey-text">인증이 완료됐습니다.</p>}
             <Modal 
                 message={modalMessage} 
                 isOpen={isModalOpen} 

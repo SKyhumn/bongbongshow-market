@@ -59,7 +59,11 @@ export default function SignIn(){
                 <h1>로그인</h1>
                 <Email value={email} onChangeValue={(v)=>setEmail(v)}/>
                 <Password value={password} onChangeValue={(v)=>setPassword(v)}/>
-                <button type="submit" disabled={!isValid} className={isValid?"blue-btn":""}>
+                <button 
+                    type="submit" 
+                    disabled={!isValid} 
+                    className={isValid?"blue-btn":""}
+                >
                     로그인
                 </button>
                 <button onClick={goSignUpPage}>회원가입</button>

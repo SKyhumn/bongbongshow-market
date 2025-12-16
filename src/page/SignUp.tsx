@@ -17,12 +17,15 @@ export default function SignUp(){
     const [modalMessage, setModalMessage]=useState<string>('');
     const [successed, setSuccessed]=useState<boolean>(false);
 
-    const isAlright=name.trim()!==""&&verified&&password.trim()!=="";
+    const isAlright=
+        name.trim()!==""&&
+        verified&&
+        password.trim()!=="";
 
     const nav=useNavigate();
 
     // 회원가입
-    const handleSignUp=async(e:React.MouseEvent<HTMLButtonElement>)=>{
+    const handleSignUp=async(e:React.FormEvent<HTMLFormElement>)=>{
         e.preventDefault();
         setSuccessed(false);
 
@@ -73,7 +76,7 @@ export default function SignUp(){
     return(
         <div className="sign-up-page">
             <BackButton onClick={goSignInPage}/>
-            <form>
+            <form onSubmit={handleSignUp}>
                 <h1>회원가입</h1>
                 <Name value={name} onChangeValue={(v)=>setName(v)}/>
                 <Email value={email} onChangeValue={(v)=>setEmail(v)}/>
@@ -81,7 +84,6 @@ export default function SignUp(){
                 <Password value={password} onChangeValue={(v)=>setPassword(v)}/>
                 <button 
                     type="submit"
-                    onClick={handleSignUp}
                     disabled={!isAlright} 
                     className={isAlright?"blue-btn":""}
                 >
@@ -91,7 +93,7 @@ export default function SignUp(){
             <Modal
                 message={modalMessage}
                 isOpen={isModalOpen}
-                func={successed===true?success:failed}
+                func={successed?success:failed}
             />
         </div>
     );
