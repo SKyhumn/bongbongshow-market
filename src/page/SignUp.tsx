@@ -1,12 +1,12 @@
 import axios from "axios";
-import Name from "../components/Name";
-import Email from "../components/Email";
-import Password from "../components/Password";
-import BackButton from "../components/BackButton";
-import Verify from "../components/Verify";
+import Name from "../components/Authentication/Name";
+import Email from "../components/Authentication/Email";
+import Password from "../components/Authentication/Password";
+import BackButton from "../components/Etc/BackButton";
+import Verify from "../components/Authentication/Verify";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Modal from "../components/Modal";
+import Modal from "../components/Etc/Modal";
 
 export default function SignUp(){
     const [name, setName]=useState<string>('');

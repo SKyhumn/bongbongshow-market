@@ -1,7 +1,7 @@
 import axios from "axios";
-import Modal from "./Modal";
+import Modal from "../Etc/Modal";
 import { useState } from "react";
-import type { VerifyProps } from "../types/VerifyProps";
+import type { VerifyProps } from "../../types/VerifyProps";
 
 export default function Verify({value, onVerified}:VerifyProps){
     const [isGsmEmail, setIsGsmEmail]=useState<boolean|null>(null);

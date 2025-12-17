@@ -1,8 +1,8 @@
 import axios from "axios";
-import Email from "../components/Email";
-import Password from "../components/Password";
-import BackButton from "../components/BackButton";
-import Modal from "../components/Modal";
+import Email from "../components/Authentication/Email";
+import Password from "../components/Authentication/Password";
+import BackButton from "../components/Etc/BackButton";
+import Modal from "../components/Etc/Modal";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import type { SignIn } from "../types/SignInType";

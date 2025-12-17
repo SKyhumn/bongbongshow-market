@@ -1,4 +1,4 @@
-import type { AuthProps } from "../types/AuthProps";
+import type { AuthProps } from "../../types/AuthProps";
 
 export default function Email({value, onChangeValue}:AuthProps){
 
