@@ -20,11 +20,6 @@ public class MemberController {
     private final MemberService service;
     private final MemberService memberService;
 
-    @GetMapping("/signin")
-    public ModelAndView signInPage(){
-        return new ModelAndView("signin");
-    }
-
     @PostMapping("/send-code")
     public ResponseEntity<String> sendCode(@RequestBody Map<String, String> body){
         String email = body.get("email");

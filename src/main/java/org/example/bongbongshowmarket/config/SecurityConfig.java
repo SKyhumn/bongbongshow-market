@@ -45,18 +45,18 @@ public class SecurityConfig {
                 )
 
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/api/public/**").permitAll()
-                        .requestMatchers("/api/user/**").hasAnyRole("USER", "ADMIN")
+                        .requestMatchers("/api/public/**", "/signin").permitAll()
+                        .requestMatchers("/api/user/**", "/hello").hasAnyRole("USER", "ADMIN")
                         .requestMatchers("/api/admin/**").hasRole("ADMIN")
                         .anyRequest().authenticated()
                 )
                 .exceptionHandling(exception -> exception
                         .authenticationEntryPoint(((request, response, authException) ->  {
-                            response.sendRedirect("/api/public/signin");
+                            response.sendRedirect("/signin");
                         })))
                 .exceptionHandling(exception -> exception
                         .authenticationEntryPoint(((request, response, authException) -> {
-                            response.sendRedirect("/api/public/signin");
+                            response.sendRedirect("/signin");
                         })))
 
                 .addFilterBefore(new JwtAuthenticationFilter(tokenProvider),

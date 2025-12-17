@@ -26,11 +26,6 @@ public class UserController {
     private final GameService gameService;
     private final MemberService memberService;
 
-    @GetMapping("/hello")
-    public ModelAndView helloP() {
-        return new ModelAndView("hello");
-    }
-
     @GetMapping("/stats")
         public ResponseEntity<UserStatsDto> getUserStats(@AuthenticationPrincipal UserDetails userDetails) {
             return ResponseEntity.ok(gameService.getUserStats(userDetails.getUsername()));
