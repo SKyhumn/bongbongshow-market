@@ -2,28 +2,20 @@ package org.example.bongbongshowmarket.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.example.bongbongshowmarket.dto.RankDto;
-import org.example.bongbongshowmarket.dto.TokenDto;
 import org.example.bongbongshowmarket.dto.UserStatsDto;
-import org.example.bongbongshowmarket.entitiy.UserEntity;
-import org.example.bongbongshowmarket.jwt.JwtTokenProvider;
 import org.example.bongbongshowmarket.repository.GameRecordRepository;
 import org.example.bongbongshowmarket.repository.UserRepository;
 import org.example.bongbongshowmarket.service.GameService;
 import org.example.bongbongshowmarket.service.MemberService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 import java.util.Map;
-import java.util.UUID;
-import java.util.concurrent.ConcurrentHashMap;
 
 @RestController
 @RequestMapping("/api/user")

@@ -35,11 +35,18 @@
             width: 35px;
             height: 35px;
             cursor: pointer;
+
+            /* Flexbox로 중앙 정렬을 시도하지만... */
             display: flex;
             align-items: center;
             justify-content: center;
+
             font-size: 1.2em;
             transition: 0.2s;
+
+            /* --- [핵심 수정] 아이콘 위치 미세 조정 --- */
+            /* 이모지가 살짝 위로 쏠려 보여서, 위쪽 여백을 주어 아이콘을 아래로 내립니다. */
+            padding-bottom: 8px;
         }
         .profile-edit-btn:hover { background: #6c5ce7; transform: scale(1.1); }
 

@@ -11,7 +11,6 @@ import org.example.bongbongshowmarket.entitiy.UserEntity;
 import org.example.bongbongshowmarket.jwt.JwtTokenProvider;
 import org.example.bongbongshowmarket.repository.GameRecordRepository;
 import org.example.bongbongshowmarket.repository.UserRepository;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,11 +18,9 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.util.Base64;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.TimeUnit;
 
 
 @Service
