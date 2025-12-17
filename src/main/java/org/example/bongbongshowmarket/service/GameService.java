@@ -101,9 +101,10 @@ public class GameService {
         for (Object[] result : results) {
             String name = (String) result[0];
             Long winCount = (Long) result[1];
+            String profileImage = (String) result[2];
 
             // 랭킹, 이메일, 승수 담기
-            rankingList.add(new RankDto(rank++, name, winCount));
+            rankingList.add(new RankDto(rank++, name, winCount, profileImage));
         }
 
         return rankingList;
@@ -117,8 +118,9 @@ public class GameService {
       for (Object[] result : results){
           String name = (String) result[0];
           Long winCount = (Long) result[1];
+          String profileImage = (String) result[2];
 
-          rankingList.add(new RankDto(rank++, name, winCount));
+          rankingList.add(new RankDto(rank++, name, winCount, profileImage));
       }
 
       return rankingList;

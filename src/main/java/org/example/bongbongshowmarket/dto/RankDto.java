@@ -13,4 +13,5 @@ public class RankDto {
     private int rank;
     private String name;
     private Long winCount;
+    private String profileImage;
 }
