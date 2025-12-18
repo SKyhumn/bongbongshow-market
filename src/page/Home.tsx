@@ -1,6 +1,5 @@
 import Header from "../components/Home/Header";
 import Me from "../components/Home/Me";
-import GoodPlayers from "../components/Home/GoodPlayers";
 import Ranking from "../components/Home/Ranking";
 
 export default function Home(){
@@ -12,7 +11,7 @@ export default function Home(){
                     <Me/>
                 </div>
                 <div className="box2">
-                    <GoodPlayers/>
+                    <h1 className="ranking-title">랭킹</h1>
                     <Ranking/>
                 </div>
             </div>
