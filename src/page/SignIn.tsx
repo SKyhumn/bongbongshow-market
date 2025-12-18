@@ -46,7 +46,8 @@ export default function SignIn(){
             console.log(res.data);
             localStorage.setItem("accessToken",res.data.accessToken);
             console.log(res.data.accessToken);
-            goHomePage();
+            // 홈페이지로 로그인 성공 보내기
+            nav('/home',{state:{loginSuccess:true}});
         } catch(err:any){
             setModalMessage('로그인에 실패했습니다.');
             setIsModalOpen(true);
