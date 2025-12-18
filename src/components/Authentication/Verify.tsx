@@ -38,7 +38,6 @@ export default function Verify({value, onVerified}:VerifyProps){
             const res=await axios.post("https://bongbong-market.shop/api/public/send-code",
                 data,
                 {
-                    withCredentials:true,
                     headers:{
                         "Content-Type":"application/json",
                     }

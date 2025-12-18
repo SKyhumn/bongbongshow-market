@@ -18,7 +18,7 @@ export default function SignIn(){
     const nav=useNavigate();
 
     // 홈페이지로
-    const goHomePage=()=>nav('/');
+    const goHomePage=()=>nav('/home');
 
     // 회원가입 페이지로
     const goSignUpPage=()=>nav('/sign-up');
@@ -44,6 +44,8 @@ export default function SignIn(){
                 }
             );
             console.log(res.data);
+            localStorage.setItem("accessToken",res.data.accessToken);
+            console.log(res.data.accessToken);
             goHomePage();
         } catch(err:any){
             setModalMessage('로그인에 실패했습니다.');

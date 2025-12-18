@@ -1,39 +1,33 @@
-export default function TheRest(){
+import type { RankingUser } from "../../types/RankingUser";
+
+interface TheRestProps {
+    data:RankingUser[];
+}
+
+export default function TheRest({data}:TheRestProps){
     return(
         <div className="the-rest">
-            <div className="rank-item">
-                <div className="user">
-                    <h2>4위</h2>
-                    <img 
-                        src="https://i.namu.wiki/i/iCO_ZCSt3i6d_Pyoe5j20gsE8hy0iBSsUBIQ87nsmqYK5Q5EE1Zk_RHoJZ5YSSzn9NJ-dgXkR5b6Av0HOauvzg.webp"
-                        className="avatar"
-                    />
-                    <h2>허태희</h2>
-                </div>
-                <h4>10승</h4>
-            </div>
-            <div className="rank-item">
-                <div className="user">
-                    <h2>5위</h2>
-                    <img 
-                        src="https://i.namu.wiki/i/iCO_ZCSt3i6d_Pyoe5j20gsE8hy0iBSsUBIQ87nsmqYK5Q5EE1Zk_RHoJZ5YSSzn9NJ-dgXkR5b6Av0HOauvzg.webp"
-                        className="avatar"
-                    />
-                    <h2>이평강</h2>
-                </div>
-                <h4>7승</h4>
-            </div>
-            <div className="rank-item">
-                <div className="user">
-                    <h2>6위</h2>
-                    <img 
-                        src="https://i.namu.wiki/i/iCO_ZCSt3i6d_Pyoe5j20gsE8hy0iBSsUBIQ87nsmqYK5Q5EE1Zk_RHoJZ5YSSzn9NJ-dgXkR5b6Av0HOauvzg.webp"
-                        className="avatar"
-                    />
-                    <h2>김동현</h2>
-                </div>
-                <h4>4승</h4>
-            </div>
+            {data.map(dt=>{
+                const profileSrc =
+                    dt.profileImage && dt.profileImage.trim() !== ""
+                        ? dt.profileImage
+                        : "/default-profile.jpeg";
+
+                return(
+                    <div className="rank-item" key={dt.rank}>
+                        <div className="user">
+                            <h2>{dt.rank}위</h2>
+                            <img 
+                                src={profileSrc}
+                                className="avatar"
+                                alt={`${dt.name} 프로필`}
+                            />
+                            <h2>{dt.name}</h2>
+                        </div>
+                        <h4>{dt.winCount}승</h4>
+                    </div>
+                )
+            })}
         </div>
     );
 }
