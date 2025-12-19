@@ -336,18 +336,7 @@ button{
 
 .modal-content{
   width:22rem;
-  height:10rem;
-  padding:2rem;
-  border-radius:0.5rem;
-  background-color:white;
-  opacity:0;
-  transform: translateY(2rem);
-  animation:modalAnimation 0.3s ease-out forwards;
-}
-
-.withdraw-modal-content{
-  width:22rem;
-  height:9.5rem;
+  height:1fr;
   padding:2rem;
   border-radius:0.5rem;
   background-color:white;
@@ -363,21 +352,16 @@ button{
   }
 }
 
-.modal-content h2, .withdraw-modal-content h2{
+.modal-content h2{
   position:relative;
   top:2rem;
+  margin:0;
   text-align:center;
   color:black;
 }
 
-.withdraw-modal-content h2{
-  margin:0;
-}
-
 .modal-content .blue-btn, 
-.modal-content .red-btn,
-.withdraw-modal-content .blue-btn,
-.withdraw-modal-content .red-btn{
+.modal-content .red-btn{
   float:right;
   width:4rem;
   margin-top:3rem;

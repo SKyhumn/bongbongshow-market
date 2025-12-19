@@ -35,7 +35,7 @@ export default function Verify({value, onVerified}:VerifyProps){
         }
 
         try{
-            const res=await axios.post("https://bongbong-market.shop/api/public/send-code",
+            await axios.post("https://bongbong-market.shop/api/public/send-code",
                 data,
                 {
                     headers:{
@@ -43,11 +43,8 @@ export default function Verify({value, onVerified}:VerifyProps){
                     }
                 }
             );
-            console.log(res.data);
-            console.log("인증코드 전송");
             setIsGsmEmail(true);
         } catch(err:any){
-            console.log(err);
             setIsGsmEmail(false);
             setIsModalOpen(true);
             setModalMessage('이메일을 다시 입력해주세요.');
@@ -64,7 +61,7 @@ export default function Verify({value, onVerified}:VerifyProps){
         }
 
         try{
-            const res=await axios.post("https://bongbong-market.shop/api/public/verify-code",
+            await axios.post("https://bongbong-market.shop/api/public/verify-code",
                 data,
                 {
                     withCredentials:true,
@@ -110,7 +107,13 @@ export default function Verify({value, onVerified}:VerifyProps){
                                 onChange={(e)=>setCode(e.target.value)}
                                 className="verifying-input"
                             />
-                            <button onClick={handleVerify} className="verifying-btn">인증하기</button>
+                            <button 
+                                onClick={handleVerify} 
+                                disabled={verified} 
+                                className="verifying-btn"
+                            >
+                                인증하기
+                            </button>
                         </div>
                     )}
                 </div>

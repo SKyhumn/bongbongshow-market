@@ -17,6 +17,11 @@ export default function SignUp(){
     const [modalMessage, setModalMessage]=useState<string>('');
     const [successed, setSuccessed]=useState<boolean>(false);
 
+    const isPasswordValid = (pw: string) => {
+        // 최소 8자리, 영문자 + 숫자 포함
+        return /^(?=.*[A-Za-z])(?=.*\d)(?=.*[!@#$%^&*]).{8,}$/.test(pw);
+    }       
+
     const isAlright=
         name.trim()!==""&&
         verified&&
@@ -29,6 +34,12 @@ export default function SignUp(){
         e.preventDefault();
         setSuccessed(false);
 
+        if(!isPasswordValid(password)){
+            setIsModalOpen(true);
+            setModalMessage("비밀번호는 8자리 이상, 영문자 숫자 모두 포함해야 합니다.");
+            return;
+        }
+
         const data={
             "email":`${email}@gsm.hs.kr`,
             "password":password,
@@ -36,7 +47,7 @@ export default function SignUp(){
         }
 
         try{
-            const res=await axios.post("https://bongbong-market.shop/api/public/signup",
+            await axios.post("https://bongbong-market.shop/api/public/signup",
                 data,
                 {
                     withCredentials:true,
@@ -45,8 +56,6 @@ export default function SignUp(){
                     },
                 }
             );
-            console.log(res.data);
-            console.log("회원 가입 성공");
             setIsModalOpen(true);
             setModalMessage('회원 가입에 성공했습니다.');
             setSuccessed(true);

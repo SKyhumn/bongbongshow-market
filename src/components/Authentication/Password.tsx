@@ -14,6 +14,7 @@ export default function Password({value, onChangeValue}:AuthProps){
             <input 
                 type={visibility?"text":"password"} 
                 value={value} 
+                placeholder="영문자 숫자 조합, 8자리 이상"
                 onChange={(e)=>onChangeValue(e.target.value)}
             />
             <span>
