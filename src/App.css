@@ -73,6 +73,77 @@
   text-align:center;
 }
 
+.my-info{
+  width:100%;
+  height:100%;
+}
+
+.changing-avatar{
+  display:flex;
+  width:100%;
+  height:50%;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+}
+
+.changing-avatar img{
+  width:8rem;
+  height:8rem;
+  border-radius:50%;
+}
+
+.changing-avatar button{
+  width:8rem;
+  margin-top:2rem;
+}
+
+.my-rank{
+  display:flex;
+  width:100%;
+  height:20%;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+}
+
+.my-rank h1, .my-rank h4{
+  margin:0;
+}
+
+.my-rank h1{
+  font-size:3rem;
+}
+
+.my-score{
+  display:flex;
+  width:100%;
+  height:20%;
+  align-items:center;
+  justify-content:space-evenly;
+  text-align:center;
+}
+
+.my-score h2{
+  margin-bottom:0.5rem;
+}
+
+.win h2{
+  color:rgb(89, 130, 255);
+}
+
+.lose h2{
+  color:rgb(207, 0, 0);
+}
+
+.draw h2{
+  color:black;
+}
+
+.my-score h3{
+  margin-top:0;
+}
+
 .ranking{
   width:100%;
   height:calc(100% - 3rem);
@@ -377,7 +448,7 @@ button{
 
 @media (orientation: portrait){
   #content{
-    grid-template-columns: 1fr;
+    grid-template-columns:1fr;
     grid-template-rows:18rem 1fr;
   }
   .box1{
@@ -385,6 +456,26 @@ button{
   }
   .box2{
     height:100%;
+  }
+  .me{
+    width:92%;
+    padding-left:4%;
+    padding-right:4%;
+  }
+  .me h1{
+    text-align:left;
+  }
+  .my-info{
+    display:flex;
+    height:calc(92% - 2rem);
+    align-items:center;
+  }
+  .changing-avatar img{
+    width:4rem;
+    height:4rem;
+  }
+  .changing-avatar button{
+    margin-top:0.5rem;
   }
   .podium{
     display:flex;
