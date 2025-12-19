@@ -32,7 +32,6 @@ export default function Ranking(){
                     }
                 );
                 setRanking(res.data);
-                console.log(ranking);
             } catch(err:any){
                 nav("/sign-in",{ replace: true });
             }

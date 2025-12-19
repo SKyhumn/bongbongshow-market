@@ -46,13 +46,13 @@ export default function SignUp(){
                 }
             );
             console.log(res.data);
-            console.log("회원가입 성공");
+            console.log("회원 가입 성공");
             setIsModalOpen(true);
-            setModalMessage('회원가입에 성공했습니다.');
+            setModalMessage('회원 가입에 성공했습니다.');
             setSuccessed(true);
         } catch(err:any){
             setIsModalOpen(true);
-            setModalMessage('회원가입에 실패했습니다.');
+            setModalMessage('회원 가입에 실패했습니다.');
             setSuccessed(false);
         }
     }
@@ -77,7 +77,7 @@ export default function SignUp(){
         <div className="sign-up-page">
             <BackButton onClick={goSignInPage}/>
             <form onSubmit={handleSignUp}>
-                <h1>회원가입</h1>
+                <h1>회원 가입</h1>
                 <Name value={name} onChangeValue={(v)=>setName(v)}/>
                 <Email value={email} onChangeValue={(v)=>setEmail(v)}/>
                 <Verify value={email} onVerified={()=>setVerified(true)}/>
@@ -87,7 +87,7 @@ export default function SignUp(){
                     disabled={!isAlright} 
                     className={isAlright?"blue-btn":""}
                 >
-                    회원가입
+                    회원 가입
                 </button>
             </form>
             <Modal

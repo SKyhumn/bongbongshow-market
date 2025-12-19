@@ -1,4 +1,4 @@
-import type{ ModalProps } from "../types/ModalProps";
+import type { ModalProps } from "../../types/ModalProps";
 
 export default function Modal({message, isOpen, func}:ModalProps){
     if (!isOpen) return null;

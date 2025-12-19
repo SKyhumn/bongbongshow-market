@@ -6,9 +6,9 @@ import type { VerifyProps } from "../../types/VerifyProps";
 export default function Verify({value, onVerified}:VerifyProps){
     const [isGsmEmail, setIsGsmEmail]=useState<boolean|null>(null);
     const [code, setCode]=useState<string>('');
+    const [verified, setVerified]=useState<boolean>(false);
     const [isModalOpen, setIsModalOpen]=useState<boolean>(false);
     const [modalMessage, setModalMessage]=useState<string>('');
-    const [verified, setVerified]=useState<boolean>(false);
 
     const isEmailFulled:boolean=value.trim()!=="";
 
@@ -73,13 +73,15 @@ export default function Verify({value, onVerified}:VerifyProps){
                     }
                 }
             )
-            console.log(res.data);
-            console.log("인증 성공");
             onVerified();
             verifiedTrue();
+            setIsModalOpen(true);
+            setModalMessage('인증이 완료되었습니다.');
         } catch(err:any){
-            console.log(err);
+            setCode('');
             setIsGsmEmail(false);
+            setIsModalOpen(true);
+            setModalMessage('인증에 실패했습니다.');
         }
     }
 

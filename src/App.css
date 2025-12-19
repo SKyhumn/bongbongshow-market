@@ -30,8 +30,14 @@
   cursor:pointer;
 }
 
-#header p{
+#nav p{
   cursor:pointer;
+}
+
+#nav{
+  display:flex;
+  width:9rem;
+  justify-content:space-between;
 }
 
 #content{
@@ -87,7 +93,6 @@
 }
 
 .podium .avatar{
-  position:relative;
   width:4rem;
   height:4rem;
   border-radius:50%;
@@ -290,6 +295,13 @@ button{
   background-color:rgb(89, 130, 255);
 }
 
+/* 로그아웃 모달 아니요 버튼용 */
+.red-btn{
+  margin-left:1rem;
+  color:white;
+  background-color:rgb(202, 0, 0);
+}
+
 .forgot-password{
   font-size:0.8rem;
   text-align:center;
@@ -316,7 +328,7 @@ button{
   left:0;
   width:100%;
   height:100vh;
-  z-index:15;
+  z-index:999;
   align-items:center;
   justify-content:center;
   background-color:rgba(0, 0, 0, .5);
@@ -333,6 +345,17 @@ button{
   animation:modalAnimation 0.3s ease-out forwards;
 }
 
+.withdraw-modal-content{
+  width:22rem;
+  height:9.5rem;
+  padding:2rem;
+  border-radius:0.5rem;
+  background-color:white;
+  opacity:0;
+  transform: translateY(2rem);
+  animation:modalAnimation 0.3s ease-out forwards;
+}
+
 @keyframes modalAnimation{
   to{
     opacity:1;
@@ -340,13 +363,21 @@ button{
   }
 }
 
-.modal-content h2{
+.modal-content h2, .withdraw-modal-content h2{
   position:relative;
   top:2rem;
   text-align:center;
+  color:black;
 }
 
-.modal-content .blue-btn{
+.withdraw-modal-content h2{
+  margin:0;
+}
+
+.modal-content .blue-btn, 
+.modal-content .red-btn,
+.withdraw-modal-content .blue-btn,
+.withdraw-modal-content .red-btn{
   float:right;
   width:4rem;
   margin-top:3rem;

@@ -43,15 +43,11 @@ export default function SignIn(){
                     },
                 }
             );
-            console.log(res.data);
             localStorage.setItem("accessToken",res.data.accessToken);
-            console.log(res.data.accessToken);
-            // 홈페이지로 로그인 성공 보내기
-            nav('/home',{state:{loginSuccess:true}});
+            nav('/home');
         } catch(err:any){
             setModalMessage('로그인에 실패했습니다.');
             setIsModalOpen(true);
-            console.log(err);
         }
     }
 
@@ -69,7 +65,7 @@ export default function SignIn(){
                 >
                     로그인
                 </button>
-                <button onClick={goSignUpPage}>회원가입</button>
+                <button onClick={goSignUpPage}>회원 가입</button>
                 <p className="forgot-password">비밀번호를 잊으셨나요?</p>
             </form>
             <Modal 
