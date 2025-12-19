@@ -19,7 +19,6 @@ export default function TheRest({data}:TheRestProps){
                             <h2>{dt.rank}위</h2>
                             <img 
                                 src={profileSrc}
-                                className="avatar"
                                 alt={`${dt.name} 프로필`}
                             />
                             <h2>{dt.name}</h2>

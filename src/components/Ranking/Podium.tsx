@@ -17,7 +17,6 @@ export default function Podium({data}:PodiumProps){
             <div className="second">
                 <img 
                     src={second&&profileSrc(second.profileImage)} 
-                    className="avatar"
                 />
                 <h3>{second&&second.name}</h3>
                 <h4>{second&&second.winCount}승</h4>
@@ -29,7 +28,6 @@ export default function Podium({data}:PodiumProps){
             <div className="first">
                 <img 
                     src={first&&profileSrc(first.profileImage)} 
-                    className="avatar"
                 />
                 <h3>{first&&first.name}</h3>
                 <h4>{first&&first.winCount}승</h4>
@@ -41,7 +39,6 @@ export default function Podium({data}:PodiumProps){
             <div className="third">
                 <img 
                     src={third&&profileSrc(third&&third.profileImage)} 
-                    className="avatar"
                 />
                 <h3>{third&&third.name}</h3>
                 <h4>{third&&third.winCount}승</h4>
