@@ -38,7 +38,18 @@ public class MemberService {
             throw new RuntimeException("이미 가입한 이메일 입니다");
         }
         String authCode = this.createCode();
-        mailService.createNumber(toEmail, authCode);
+        mailService.createNumber(toEmail, authCode, "[봉봉마켓] 회원가입 인증번호");
+
+        memoryStore.put("AuthCode:" + toEmail, authCode);
+    }
+
+    public void sendResetCodeToEmail(String toEmail){
+        if(!repository.existsByEmail(toEmail)){
+            throw new RuntimeException("가입되지 않은 이메일 입니다.");
+        }
+
+        String authCode = this.createCode();
+        mailService.createNumber(toEmail, authCode, "[봉봉마켓] 비밀번호 재설정 인증번호");
 
         memoryStore.put("AuthCode:" + toEmail, authCode);
     }
@@ -137,5 +148,22 @@ public class MemberService {
         } catch (IOException e) {
             throw new RuntimeException("이미지 업로드 중 오류가 발생했습니다.", e);
         }
+    }
+
+    @Transactional
+    public void resetPassword(String email, String newPassword){
+        String isVerified = memoryStore.get("Verified:" + email);
+
+        if (isVerified == null || !isVerified.equals("TRUE")) {
+            throw new RuntimeException("이메일 인증이 완료되지 않았습니다.");
+        }
+        UserEntity user = repository.findByEmail(email)
+                .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 유저입니다."));
+
+        if(passwordEncoder.matches(newPassword, user.getPassword())){
+            throw new RuntimeException("이전의 설정한 비밀번호로 재설정 할 수 없습니다");
+        }
+        user.setPassword(passwordEncoder.encode(newPassword));
+        memoryStore.remove("Verified:" + email);
     }
 }

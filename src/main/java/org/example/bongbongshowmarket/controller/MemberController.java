@@ -66,4 +66,28 @@ public class MemberController {
 
         return ResponseEntity.ok("로그아웃 되었습니다");
     }
+    
+    @PostMapping("/send-reset-code")
+    public ResponseEntity<String> sendResetCode(@RequestBody Map<String, String> body){
+        String email = body.get("email");
+        try{
+            memberService.sendResetCodeToEmail(email);
+            return ResponseEntity.ok("인증번호가 발송되었습니다.");
+        } catch (RuntimeException e){
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
+    @PostMapping("/reset-password")
+    public ResponseEntity<String> resetPassword(@RequestBody Map<String, String> body) {
+        String email = body.get("email");
+        String newPassword = body.get("newPassword");
+
+        try {
+            memberService.resetPassword(email, newPassword);
+            return ResponseEntity.ok("비밀번호가 성공적으로 변경되었습니다.");
+        } catch (RuntimeException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
 }

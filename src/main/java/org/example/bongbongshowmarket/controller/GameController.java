@@ -26,6 +26,7 @@ public class GameController {
         }
 
         String userMove = payload.get("userMove");
+        String aiMove = payload.get("aiMove");
 
         String email = userDetails.getUsername();
         UserEntity entity = repository.findByEmail(email)
@@ -33,6 +34,6 @@ public class GameController {
 
         Long userNo = entity.getUserNo();
 
-        return gameService.playGame(userMove, userNo);
+        return gameService.playGame(userMove, userNo, aiMove);  
     }
 }

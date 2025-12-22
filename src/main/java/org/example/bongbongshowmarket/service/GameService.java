@@ -27,15 +27,12 @@ public class GameService {
     private final Random random = new Random(); // 랜덤
     private final String[] moves = {"rock", "scissors", "paper"}; // 주먹, 가위, 보 설정
 
-  public Map<String, String> playGame(String userMove, Long userNo){
+  public Map<String, String> playGame(String userMove, Long userNo, String aiMove){
       if(userMove == null){
           throw new IllegalArgumentException("UserMove cannot be null");
       }
-
       UserEntity user = userRepository.findById(userNo)
               .orElseThrow(() -> new IllegalArgumentException("존재하지 않은 유저 입니다"));
-
-      String aiMove = moves[random.nextInt(moves.length)];
       String result = determineWinner(userMove, aiMove);
 
       saveGameRecord(user, result);

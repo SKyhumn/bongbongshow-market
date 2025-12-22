@@ -20,7 +20,7 @@ public class MailService {
     @Value("${spring.mail.username}")
     private String senderEmail;
 
-    public void createNumber(String email, String number){
+    public void createNumber(String email, String number, String subject){
         MimeMessage message = javaMailSender.createMimeMessage();
 
         try{
