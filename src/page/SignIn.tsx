@@ -11,6 +11,7 @@ export default function SignIn(){
     const [password, setPassword]=useState<string>('');
     const [isModalOpen, setIsModalOpen]=useState<boolean>(false);
     const [modalMessage, setModalMessage]=useState<string>('');
+    const [modalFunc, setModalFunc] = useState<() => void>(() => () => {});
 
     const isValid:boolean=email.trim()!==""&&password.trim()!=="";
 
@@ -40,10 +41,18 @@ export default function SignIn(){
                 }
             );
             localStorage.setItem("accessToken",res.data.accessToken);
-            nav('/home');
+            setModalMessage("로그인에 성공했습니다.");
+            setModalFunc(() => {
+                return () => {
+                    setIsModalOpen(false);
+                    nav('/home'); // 모달 닫으면 홈으로 이동
+                };
+            });
+            setIsModalOpen(true);
         } catch(err:any){
             setModalMessage('로그인에 실패했습니다.');
             setIsModalOpen(true);
+            setModalFunc(() => () => setIsModalOpen(false)); // 모달 닫기만
         }
     }
 
@@ -66,7 +75,7 @@ export default function SignIn(){
             <Modal 
                 message={modalMessage} 
                 isOpen={isModalOpen}
-                func={()=>setIsModalOpen(false)}
+                func={modalFunc}
             />
         </div>
     );
