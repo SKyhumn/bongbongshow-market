@@ -67,6 +67,7 @@ export default function Ranking(){
             initial="hidden" 
             animate="show"
         >
+            <h1 className="ranking-title">랭킹</h1>
             <Podium data={podium}/>
             <TheRest data={theRest}/>
         </motion.div>

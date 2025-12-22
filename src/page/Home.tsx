@@ -11,7 +11,6 @@ export default function Home(){
                     <Me/>
                 </div>
                 <div className="box2">
-                    <h1 className="ranking-title">랭킹</h1>
                     <Ranking/>
                 </div>
             </div>
