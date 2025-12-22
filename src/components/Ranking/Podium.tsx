@@ -1,4 +1,6 @@
 import type { RankingUser } from "../../types/RankingUser";
+import { motion } from "framer-motion";
+import { item } from "../../animation/Ranking";
 
 interface PodiumProps {
     data:RankingUser[];
@@ -13,7 +15,7 @@ export default function Podium({data}:PodiumProps){
     const third:RankingUser|undefined=data.find(u=>u.rank===3);
 
     return(
-        <div className="podium">
+        <motion.div className="podium" variants={item}>
             <div className="second">
                 <img 
                     src={second&&profileSrc(second.profileImage)} 
@@ -46,6 +48,6 @@ export default function Podium({data}:PodiumProps){
                     <h2>3위</h2>
                 </div>
             </div>
-        </div>
+        </motion.div>
     );
 }

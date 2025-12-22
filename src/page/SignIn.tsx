@@ -1,7 +1,6 @@
 import axios from "axios";
 import Email from "../components/Authentication/Email";
 import Password from "../components/Authentication/Password";
-import BackButton from "../components/Etc/BackButton";
 import Modal from "../components/Etc/Modal";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -16,9 +15,6 @@ export default function SignIn(){
     const isValid:boolean=email.trim()!==""&&password.trim()!=="";
 
     const nav=useNavigate();
-
-    // 홈페이지로
-    const goHomePage=()=>nav('/home');
 
     // 회원가입 페이지로
     const goSignUpPage=()=>nav('/sign-up');
@@ -53,7 +49,6 @@ export default function SignIn(){
 
     return(
         <div className="sign-in-page">
-            <BackButton onClick={goHomePage}/>
             <form onSubmit={handleSignIn}>
                 <h1>로그인</h1>
                 <Email value={email} onChangeValue={(v)=>setEmail(v)}/>

@@ -5,10 +5,13 @@ import { useState } from "react";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import type { RankingUser } from "../../types/RankingUser";
+import { motion } from "framer-motion";
+import { container } from "../../animation/Ranking";
 
 
 export default function Ranking(){
     const [ranking, setRanking]=useState<RankingUser[]>([]);
+    const [isLoading, setIsLoading] = useState(true);
 
     const nav=useNavigate();
 
@@ -34,6 +37,8 @@ export default function Ranking(){
                 setRanking(res.data);
             } catch(err:any){
                 nav("/sign-in",{ replace: true });
+            } finally{
+                setIsLoading(false);
             }
         };
         fetchRanking();
@@ -43,13 +48,24 @@ export default function Ranking(){
         return () => clearInterval(interval);
     }, []);
 
+    if(isLoading){
+        return(
+            <div className="ranking">로딩 중...</div>
+        );
+    }
+
     const podium=ranking.filter(user=>user.rank<=3);
     const theRest=ranking.filter(user=>user.rank>3);
 
     return(
-        <div className="ranking">
+        <motion.div 
+            className="ranking" 
+            variants={container} 
+            initial="hidden" 
+            animate="show"
+        >
             <Podium data={podium}/>
             <TheRest data={theRest}/>
-        </div>
+        </motion.div>
     );
 }

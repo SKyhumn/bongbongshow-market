@@ -1,4 +1,6 @@
 import type { RankingUser } from "../../types/RankingUser";
+import { motion } from "framer-motion";
+import { item } from "../../animation/Ranking";
 
 interface TheRestProps {
     data:RankingUser[];
@@ -6,12 +8,17 @@ interface TheRestProps {
 
 export default function TheRest({data}:TheRestProps){
     return(
-        <div className="the-rest">
+        <motion.div 
+            className="the-rest" 
+            variants={item} 
+            initial="hidden"
+            animate="show"
+        >
             {data.map(dt=>{
                 const profileSrc =
                     dt.profileImage && dt.profileImage.trim() !== ""
-                        ? dt.profileImage
-                        : "/default-profile.jpeg";
+                    ? dt.profileImage
+                    : "/default-profile.jpeg";
 
                 return(
                     <div className="rank-item" key={dt.rank}>
@@ -27,6 +34,6 @@ export default function TheRest({data}:TheRestProps){
                     </div>
                 )
             })}
-        </div>
+        </motion.div>
     );
 }
