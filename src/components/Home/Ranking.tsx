@@ -15,6 +15,7 @@ export default function Ranking(){
 
     const nav=useNavigate();
 
+    // Ranking데이터 호출
     useEffect(()=>{
         const fetchRanking=async()=>{
             const token = localStorage.getItem("accessToken");
@@ -48,6 +49,8 @@ export default function Ranking(){
         return () => clearInterval(interval);
     }, []);
 
+
+    // 로딩 중...
     if(isLoading){
         return(
             <div className="ranking">로딩 중...</div>

@@ -11,6 +11,7 @@ export default function Me(){
     const [isLoading, setIsLoading]=useState<boolean>(true);
     const [error, setError]=useState<string|null>(null);
 
+    // 내 정보 불러오기
     useEffect(()=>{
         const fetchMyInfo=async()=>{
             const token=localStorage.getItem("accessToken");
@@ -32,12 +33,19 @@ export default function Me(){
             }
         }
         fetchMyInfo();
+
+        const interval = setInterval(fetchMyInfo, 3000);
+
+        return () => clearInterval(interval);
     },[]);
 
+
+    // 로딩 중...
     if (isLoading) {
         return <div className="me">로딩 중...</div>;
     }
 
+    // 로딩 실패
     if (error) {
         return <div className="me">{error}</div>;
     }
@@ -71,15 +79,15 @@ export default function Me(){
                     className="my-score" 
                     variants={item}
                 >
-                    <div className="win">
+                    <div className="win" key={user?.win}>
                         <h2>승</h2>
                         <h3>{user?user?.win:"-"}</h3>
                     </div>
-                    <div className="lose">
+                    <div className="lose" key={user?.lose}>
                         <h2>패</h2>
                         <h3>{user?user?.lose:"-"}</h3>
                     </div>
-                    <div className="draw">
+                    <div className="draw" key={user?.draw}>
                         <h2>무</h2>
                         <h3>{user?user?.draw:"-"}</h3>
                     </div>
