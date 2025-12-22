@@ -1,8 +1,10 @@
 import axios from "axios";
 import { useEffect } from "react";
 import { useState } from "react";
-import { motion } from "framer-motion";
 import type { User } from "../../types/User";
+import { container } from "../../animation/Animation";
+import { item } from "../../animation/Animation";
+import { motion } from "framer-motion";
 
 export default function Me(){
     const [user, setUser]=useState<User|null>(null);
@@ -31,28 +33,6 @@ export default function Me(){
         }
         fetchMyInfo();
     },[]);
-
-    const container={
-        hidden:{opacity:0},
-        show:{
-            opacity:1,
-            transition:{
-                staggerChildren:0.05,
-            },
-        },
-    }
-
-    const item={
-        hidden:{opacity:0, y:15},
-        show:{
-            opacity:1, 
-            y:0,
-            transition:{
-                duration: 0.35,
-                ease:"easeOut"as any
-            }
-        },
-    }
 
     if (isLoading) {
         return <div className="me">로딩 중...</div>;

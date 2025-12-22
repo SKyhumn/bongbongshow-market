@@ -1,6 +1,6 @@
 import type { RankingUser } from "../../types/RankingUser";
 import { motion } from "framer-motion";
-import { item } from "../../animation/Ranking";
+import { item } from "../../animation/Animation";
 
 interface TheRestProps {
     data:RankingUser[];

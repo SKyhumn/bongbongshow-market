@@ -6,7 +6,7 @@ import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import type { RankingUser } from "../../types/RankingUser";
 import { motion } from "framer-motion";
-import { container } from "../../animation/Ranking";
+import { container } from "../../animation/Animation";
 
 
 export default function Ranking(){
