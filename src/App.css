@@ -470,7 +470,7 @@ button{
 @media (orientation: portrait){
   #content{
     grid-template-columns:1fr;
-    grid-template-rows:18rem 65%;
+    grid-template-rows:18rem 1fr;
   }
   .box1{
     grid-row:1/2;
@@ -505,6 +505,6 @@ button{
     justify-content:space-between;
   }
   .the-rest{
-    height:1fr;
+    height:25rem;
   }
 }

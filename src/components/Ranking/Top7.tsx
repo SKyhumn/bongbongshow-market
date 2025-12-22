@@ -13,7 +13,7 @@ export default function Top7({data}:Top7Props){
             variants={item} 
             initial="hidden"
             animate="show"
-        >
+        > 
             {data.map(dt=>{
                 const profileSrc =
                     dt.profileImage && dt.profileImage.trim() !== ""
