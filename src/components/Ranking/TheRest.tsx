@@ -26,7 +26,7 @@ export default function TheRest({data}:TheRestProps){
                             <h2>{dt.rank}위</h2>
                             <img 
                                 src={profileSrc}
-                                alt={`${dt.name} 프로필`}
+                                alt={`${dt.name} profile`}
                             />
                             <h2>{dt.name}</h2>
                         </div>

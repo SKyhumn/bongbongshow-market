@@ -1,16 +1,23 @@
 import axios from "axios";
 import { useEffect } from "react";
 import { useState } from "react";
+import { useRef } from "react";
 import type { User } from "../../types/User";
 import { container } from "../../animation/Animation";
 import { item } from "../../animation/Animation";
 import { motion } from "framer-motion";
+import Modal from "../Etc/Modal";
 
 export default function Me(){
     const [user, setUser]=useState<User|null>(null);
     const [isLoading, setIsLoading]=useState<boolean>(true);
     const [error, setError]=useState<string|null>(null);
-
+    const [isModalOpen, setIsModalOpen]=useState<boolean>(false);
+    const [modalMessage, setModalMessage]=useState<string>('');
+    const [preview, setPreview] = useState<string | null>(null);
+    const [uploading, setUploading] = useState(false);
+    const fileInputRef = useRef<HTMLInputElement>(null);
+    
     // 내 정보 불러오기
     useEffect(()=>{
         const fetchMyInfo=async()=>{
@@ -50,6 +57,54 @@ export default function Me(){
         return <div className="me">{error}</div>;
     }
 
+    // 프로필 사진 바꾸기
+    const handleImgChange=(e: React.ChangeEvent<HTMLInputElement>)=>{
+        const file = e.target.files?.[0];
+        if (!file || !user) return;
+
+        if(file.size>2*1024*1024){
+            setModalMessage("사진은 2MB 이하만 가능합니다.");
+            setIsModalOpen(true);
+            e.target.value="";
+            return;
+        }
+
+        const previewUrl = URL.createObjectURL(file);
+        setPreview(previewUrl);
+
+        uploadProfileImg(file);
+
+        e.target.value = "";
+    }
+
+    const uploadProfileImg=async(file:File)=>{
+        const token=localStorage.getItem("accessToken");
+        const formData=new FormData();
+        formData.append("file",file);
+
+        try{
+            setUploading(true);
+
+            await axios.post(
+                "https://bongbong-market.shop/api/user/profile-image",
+                formData,
+                {
+                    withCredentials:true,
+                    headers:{
+                        Authorization:`Bearer ${token}`,
+                    },
+                }
+            );
+        } catch(err:any){
+            setPreview(null);
+            setModalMessage("이미지 변경에 실패했습니다.");
+            setIsModalOpen(true);
+
+        } finally{
+            setUploading(false);
+        }
+    }
+
     return(
         <motion.div 
             className="me" 
@@ -63,9 +118,26 @@ export default function Me(){
                     className="changing-avatar" 
                     variants={item}
                 >
-                    <img src="/default-profile.jpeg" alt="profile"/>
-                    <button className="blue-btn">프로필 사진 변경</button>
+                    <img 
+                        src={preview||user?.profileImage||"/default-profile.jpeg"} 
+                        alt="profile"
+                    />
+                    <button 
+                        className="blue-btn" 
+                        onClick={()=>fileInputRef.current?.click()}
+                        disabled={uploading}
+                    >
+                        {uploading?"업로드 중...":"프로필 사진 변경"}
+                    </button>
                 </motion.div>
+
+                <input 
+                    type="file" 
+                    accept="image/*"
+                    ref={fileInputRef}
+                    style={{display:"none"}}
+                    onChange={handleImgChange}
+                />
 
                 <motion.div 
                     className="my-rank" 
@@ -93,6 +165,11 @@ export default function Me(){
                     </div>
                 </motion.div>
             </div>
+            <Modal
+                message={modalMessage}
+                isOpen={isModalOpen}
+                func={()=>setIsModalOpen(false)}
+            />
         </motion.div>
     );
 }
