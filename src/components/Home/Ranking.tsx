@@ -1,17 +1,19 @@
 import axios from "axios";
 import Podium from "../Ranking/Podium";
-import TheRest from "../Ranking/TheRest";
+import Top7 from "../Ranking/Top7";
 import { useState } from "react";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import type { RankingUser } from "../../types/RankingUser";
 import { motion } from "framer-motion";
 import { container } from "../../animation/Animation";
+import RankingModal from "../Etc/RankingModal";
 
 
 export default function Ranking(){
     const [ranking, setRanking]=useState<RankingUser[]>([]);
-    const [isLoading, setIsLoading] = useState(true);
+    const [isLoading, setIsLoading]=useState(true);
+    const [isModalOpen, setIsModalOpen]=useState<boolean>(false);
 
     const nav=useNavigate();
 
@@ -27,7 +29,7 @@ export default function Ranking(){
 
             try{
                 const res=await axios.get(
-                    "https://bongbong-market.shop/api/user/ranking/all",
+                    "https://bongbong-market.shop/api/user/ranking",
                     {
                         withCredentials:true,
                         headers:{
@@ -58,7 +60,11 @@ export default function Ranking(){
     }
 
     const podium=ranking.filter(user=>user.rank<=3);
-    const theRest=ranking.filter(user=>user.rank>3);
+    const top7=ranking.filter(user=>user.rank>3&&user.rank<=10);
+
+    const handleRankingModal=()=>{
+        setIsModalOpen(true);
+    }
 
     return(
         <motion.div 
@@ -67,9 +73,19 @@ export default function Ranking(){
             initial="hidden" 
             animate="show"
         >
-            <h1 className="ranking-title">랭킹</h1>
+            <h1 className="ranking-title">랭킹 상위 10명</h1>
             <Podium data={podium}/>
-            <TheRest data={theRest}/>
+            <Top7 data={top7}/>
+            <button 
+                onClick={handleRankingModal} 
+                className="blue-btn"
+            >
+                랭킹 전체 보기
+            </button>
+            <RankingModal
+                isOpen={isModalOpen}
+                func={()=>setIsModalOpen(false)}
+            />
         </motion.div>
     );
 }

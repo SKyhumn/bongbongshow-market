@@ -2,11 +2,11 @@ import type { RankingUser } from "../../types/RankingUser";
 import { motion } from "framer-motion";
 import { item } from "../../animation/Animation";
 
-interface TheRestProps {
+interface Top7Props {
     data:RankingUser[];
 }
 
-export default function TheRest({data}:TheRestProps){
+export default function Top7({data}:Top7Props){
     return(
         <motion.div 
             className="the-rest" 

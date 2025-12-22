@@ -49,12 +49,12 @@ export default function Me(){
 
     // 로딩 중...
     if (isLoading) {
-        return <div className="me">로딩 중...</div>;
+        return <div className="me">로딩 중...</div>
     }
 
     // 로딩 실패
     if (error) {
-        return <div className="me">{error}</div>;
+        return <div className="me">{error}</div>
     }
 
     // 프로필 사진 바꾸기
