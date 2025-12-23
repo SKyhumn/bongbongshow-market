@@ -158,7 +158,7 @@ export default function Me(){
                     />
 
                     {/* 버튼들을 세로로 정렬하기 위한 div */}
-                    <div style={{display:'flex', flexDirection:'column', gap:'10px'}}>
+                    <div style={{display:'flex', flexDirection:'row', gap:'10px'}}>
                         <button
                             className="blue-btn"
                             onClick={()=>fileInputRef.current?.click()}
