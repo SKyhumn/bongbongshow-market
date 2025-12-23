@@ -1,13 +1,14 @@
 import type { RankingUser } from "../../types/User/RankingUser";
 import { motion } from "framer-motion";
 import { item } from "../../animation/Animation";
+import baseImg from "../../images/default-profile.jpeg"
 
 interface PodiumProps {
     data:RankingUser[];
 }
 
 const profileSrc=(img?:string)=>
-    img && img.trim() !== "" ? img : "../src/assets/img/default-profile.jpeg";
+    img && img.trim() !== "" ? img : baseImg;
 
 export default function Podium({data}:PodiumProps){
     const first:RankingUser|undefined=data.find(u=>u.rank===1);

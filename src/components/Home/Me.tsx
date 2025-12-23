@@ -7,6 +7,7 @@ import { container } from "../../animation/Animation";
 import { item } from "../../animation/Animation";
 import { motion } from "framer-motion";
 import Modal from "../Modals/Modal";
+import baseImg from "../../images/default-profile.jpeg"
 
 export default function Me(){
     const [user, setUser]=useState<User|null>(null);
@@ -119,7 +120,7 @@ export default function Me(){
                     variants={item}
                 >
                     <img 
-                        src={preview||user?.profileImage||"../src/assets/img/default-profile.jpeg"} 
+                        src={preview||user?.profileImage||baseImg} 
                         alt="profile"
                     />
                     <button 

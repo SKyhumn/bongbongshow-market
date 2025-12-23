@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import type { RankingModalProps } from "../../types/Modal/RankingModalProps";
 import type { RankingUser } from "../../types/User/RankingUser";
+import baseImg from "../../images/default-profile.jpeg"
 
 export default function RankingModal({ isOpen, func }: RankingModalProps) {
     const [data, setData] = useState<RankingUser[]>([]);
@@ -77,7 +78,7 @@ export default function RankingModal({ isOpen, func }: RankingModalProps) {
                             <div className="user">
                                 <h4>{dt.rank}위</h4>
                                 <img 
-                                    src={dt.profileImage||"/default-profile.jpeg"} 
+                                    src={dt.profileImage||baseImg} 
                                     alt={`${dt.name} profile`} 
                                 />
                                 <h4>{dt.name}</h4>

@@ -1,6 +1,7 @@
 import type { RankingUser } from "../../types/User/RankingUser";
 import { motion } from "framer-motion";
 import { item } from "../../animation/Animation";
+import baseImg from "../../images/default-profile.jpeg"
 
 interface Top7Props {
     data:RankingUser[];
@@ -16,9 +17,9 @@ export default function Top7({data}:Top7Props){
         > 
             {data.map(dt=>{
                 const profileSrc =
-                    dt.profileImage && dt.profileImage.trim() !== ""
-                    ? dt.profileImage
-                    : "../src/assets/img/default-profile.jpeg";
+                    dt.profileImage && dt.profileImage.trim()!==""
+                    ?dt.profileImage:
+                    baseImg;
 
                 return(
                     <div className="rank-item" key={dt.rank}>

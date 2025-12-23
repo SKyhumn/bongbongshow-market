@@ -1,5 +1,7 @@
 import type { AuthProps } from "../../types/Auth/AuthProps";
 import { useState } from "react";
+import show from "../../images/show.svg";
+import noShow from "../../images/no-show.svg"
 
 export default function Password({value, onChangeValue}:AuthProps){
     const [visibility, setVisibility]=useState<boolean>(false);
@@ -19,7 +21,7 @@ export default function Password({value, onChangeValue}:AuthProps){
             />
             <span>
                 <img 
-                    src={visibility?"../src/assets/icon/no-show.svg":"../src/assets/icon/show.svg"} 
+                    src={visibility?noShow:show} 
                     onClick={handleVisibility}
                 />
             </span>
