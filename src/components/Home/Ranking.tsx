@@ -37,7 +37,10 @@ export default function Ranking(){
                         },
                     }
                 );
-                setRanking(res.data);
+                const sortedRanking=res.data.sort(
+                    (a:RankingUser,b:RankingUser)=>a.rank-b.rank
+                );
+                setRanking(sortedRanking);
             } catch(err:any){
                 nav("/sign-in",{ replace: true });
             } finally{
@@ -59,8 +62,8 @@ export default function Ranking(){
         );
     }
 
-    const podium=ranking.filter(user=>user.rank<=3);
-    const top7=ranking.filter(user=>user.rank>3&&user.rank<=10);
+    const podium=ranking.slice(0,3);
+    const top7=ranking.slice(3,10);
 
     const handleRankingModal=()=>{
         setIsModalOpen(true);

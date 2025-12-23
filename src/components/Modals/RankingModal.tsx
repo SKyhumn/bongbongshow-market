@@ -35,7 +35,10 @@ export default function RankingModal({ isOpen, func }: RankingModalProps) {
                         },
                     }
                 );
-            if (isMounted) setData(res.data);
+                const sortedRanking=res.data.sort(
+                    (a:RankingUser,b:RankingUser)=>a.rank-b.rank
+                );
+                if (isMounted) setData(sortedRanking);
             } catch(err:any) {
                 if (isMounted) setError("랭킹을 불러올 수 없습니다.");
             } finally {
