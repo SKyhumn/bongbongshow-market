@@ -7,6 +7,8 @@ import { container } from "../../animation/Animation";
 import { item } from "../../animation/Animation";
 import { motion } from "framer-motion";
 import Modal from "../Modals/Modal";
+// ▼▼▼ 1. 라이브러리 추가 ▼▼▼
+import { QrReader } from "react-qr-reader";
 
 export default function Me(){
     const [user, setUser]=useState<User|null>(null);
@@ -17,14 +19,18 @@ export default function Me(){
     const [preview, setPreview] = useState<string | null>(null);
     const [uploading, setUploading] = useState(false);
     const fileInputRef = useRef<HTMLInputElement>(null);
-    
+
+    // ▼▼▼ 2. QR 관련 상태 추가 ▼▼▼
+    const [isQrOpen, setIsQrOpen] = useState<boolean>(false);
+    const [isProcessingQr, setIsProcessingQr] = useState<boolean>(false);
+
     // 내 정보 불러오기
     useEffect(()=>{
         const fetchMyInfo=async()=>{
             const token=localStorage.getItem("accessToken");
             try{
                 const res=await axios.get(
-                    "https://bongbong-market.shop/api/user/stats",
+                    "/api/user/stats",
                     {
                         withCredentials:true,
                         headers:{
@@ -86,7 +92,7 @@ export default function Me(){
             setUploading(true);
 
             await axios.post(
-                "https://bongbong-market.shop/api/user/profile-image",
+                "/api/user/profile-image",
                 formData,
                 {
                     withCredentials:true,
@@ -105,50 +111,92 @@ export default function Me(){
         }
     }
 
+    // ▼▼▼ 3. QR 스캔 핸들러 추가 ▼▼▼
+    const handleScan = async (result: any) => {
+        if (result && !isProcessingQr) {
+            setIsProcessingQr(true);
+            const qrUuid = result?.text;
+
+            try {
+                const token = localStorage.getItem("accessToken");
+                await axios.post(
+                    "/api/user/qr/authorize",
+                    { qrCode: qrUuid },
+                    {
+                        withCredentials: true,
+                        headers: { Authorization: `Bearer ${token}` }
+                    }
+                );
+                setModalMessage("키오스크 로그인이 완료되었습니다!");
+                setIsQrOpen(false);
+            } catch (err) {
+                setModalMessage("QR 인증에 실패했습니다.");
+            } finally {
+                setIsModalOpen(true);
+                setIsProcessingQr(false);
+                setIsQrOpen(false);
+            }
+        }
+    };
+
     return(
-        <motion.div 
-            className="me" 
-            variants={container} 
-            initial="hidden" 
+        <motion.div
+            className="me"
+            variants={container}
+            initial="hidden"
             animate="show"
         >
             <motion.h1 variants={item}>내 전적</motion.h1>
             <div className="my-info">
-                <motion.div 
-                    className="changing-avatar" 
+                <motion.div
+                    className="changing-avatar"
                     variants={item}
                 >
-                    <img 
-                        src={preview||user?.profileImage||"/default-profile.jpeg"} 
+                    <img
+                        src={preview||user?.profileImage||"/default-profile.jpeg"}
                         alt="profile"
                     />
-                    <button 
-                        className="blue-btn" 
-                        onClick={()=>fileInputRef.current?.click()}
-                        disabled={uploading}
-                    >
-                        {uploading?"업로드 중...":"프로필 사진 변경"}
-                    </button>
+
+                    {/* 버튼들을 세로로 정렬하기 위한 div */}
+                    <div style={{display:'flex', flexDirection:'column', gap:'10px'}}>
+                        <button
+                            className="blue-btn"
+                            onClick={()=>fileInputRef.current?.click()}
+                            disabled={uploading}
+                        >
+                            {uploading?"업로드 중...":"프로필 사진 변경"}
+                        </button>
+
+                        {/* ▼▼▼ 4. QR 버튼 추가 ▼▼▼ */}
+                        <button
+                            className="blue-btn"
+                            style={{backgroundColor: '#ff6b6b'}}
+                            onClick={() => setIsQrOpen(true)}
+                        >
+                            📷 QR 로그인
+                        </button>
+                    </div>
+
                 </motion.div>
 
-                <input 
-                    type="file" 
+                <input
+                    type="file"
                     accept="image/*"
                     ref={fileInputRef}
                     style={{display:"none"}}
                     onChange={handleImgChange}
                 />
 
-                <motion.div 
-                    className="my-rank" 
+                <motion.div
+                    className="my-rank"
                     variants={item}
                 >
                     <h4>내 순위</h4>
                     <h1>{user?user?.rank:"-"}위</h1>
                 </motion.div>
-                
-                <motion.div 
-                    className="my-score" 
+
+                <motion.div
+                    className="my-score"
                     variants={item}
                 >
                     <div className="win" key={user?.win}>
@@ -165,6 +213,37 @@ export default function Me(){
                     </div>
                 </motion.div>
             </div>
+
+            {/* ▼▼▼ 5. QR 스캐너 화면 추가 ▼▼▼ */}
+            {isQrOpen && (
+                <div style={{
+                    position: 'fixed', top: 0, left: 0, width: '100%', height: '100%',
+                    backgroundColor: 'rgba(0,0,0,0.9)', zIndex: 9999,
+                    display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center'
+                }}>
+                    <h3 style={{color:'white', marginBottom:'20px'}}>키오스크 QR을 스캔하세요</h3>
+                    <div style={{width: '300px', height: '300px', backgroundColor: 'black'}}>
+                        <QrReader
+                            onResult={handleScan}
+                            constraints={{
+                                facingMode: { ideal: 'environment' }  // 또는 'user' 대신 이렇게
+                            }}
+                            videoId="video"
+                            scanDelay={500}
+                            containerStyle={{width: '100%', height: '100%'}}
+                            videoStyle={{width: '100%', height: '100%', objectFit: 'cover'}}
+                        />
+                    </div>
+                    <button
+                        className="blue-btn"
+                        style={{marginTop: '30px', backgroundColor: '#555'}}
+                        onClick={() => setIsQrOpen(false)}
+                    >
+                        닫기
+                    </button>
+                </div>
+            )}
+
             <Modal
                 message={modalMessage}
                 isOpen={isModalOpen}

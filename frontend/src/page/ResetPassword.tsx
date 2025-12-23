@@ -42,7 +42,7 @@ export default function VerifyCodeForReseting(){
 
         try{
             await axios.post(
-                "https://bongbong-market.shop/api/public/reset-password",
+                "/public/reset-password",
                 data,
                 {
                     withCredentials:true,

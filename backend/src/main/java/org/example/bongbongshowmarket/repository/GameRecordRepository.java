@@ -21,11 +21,11 @@ public interface GameRecordRepository extends JpaRepository<GameRecord, Long> {
     long countByUserAndGameResult(UserEntity user, String gameResult);
 
     // 윗 코드처와 같지만 리미트가 없음
-    @Query("SELECT u.name, COUNT(g), u.profileImage " +
+    @Query("SELECT u.name, COUNT(g), u.profileImage, u.email " +
             "FROM GameRecord g " +
             "JOIN g.user u " +
-            "WHERE g.gameResult = 'W' G" +
-            "ROUP BY u.name, u.profileImage " +
+            "WHERE g.gameResult = 'W' " +
+            "GROUP BY u " +
             "ORDER BY COUNT(g) DESC")
     List<Object[]> findAllRankers();
 

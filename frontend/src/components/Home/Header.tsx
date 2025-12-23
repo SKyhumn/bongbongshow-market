@@ -21,7 +21,7 @@ export default function Header(){
     const handleSignOut=async()=>{
       setIsSignOutModalOpen(false);
       try{
-        await axios.post("https://bongbong-market.shop/api/public/logout",
+        await axios.post("/api/public/logout",
           {},
           {
             withCredentials:true
@@ -45,7 +45,7 @@ export default function Header(){
       const token = localStorage.getItem("accessToken");
 
       try{
-        await axios.delete("https://bongbong-market.shop/api/user/delete",
+        await axios.delete("/api/user/delete",
           {
             withCredentials:true,
             headers:{

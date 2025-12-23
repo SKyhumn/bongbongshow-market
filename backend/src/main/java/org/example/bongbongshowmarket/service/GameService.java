@@ -125,25 +125,22 @@ public class GameService {
 
     @Transactional(readOnly = true)
     public UserStatsDto getUserStats(String email) {
-      UserEntity user = userRepository.findByEmail(email)
-              .orElseThrow(() -> new IllegalArgumentException("유저가 존재하지 않습니다"));
-
+        UserEntity user = userRepository.findByEmail(email)
+                .orElseThrow(() -> new IllegalArgumentException("유저가 존재하지 않습니다"));
         Long win = gameRecordRepository.countByUserAndGameResult(user, "W");
         Long lose = gameRecordRepository.countByUserAndGameResult(user,"L");
         Long draw = gameRecordRepository.countByUserAndGameResult(user,"D");
-
         List<Object[]> allRankers = gameRecordRepository.findAllRankers();
         int myRank = 0;
         int currentRank = 1;
         for(Object[] row : allRankers){
-            String rankerName = (String) row[0];
-            if (rankerName.equals(user.getName())) {
+            String rankerEmail = (String) row[3];
+            if (rankerEmail.equals(user.getEmail())) {
                 myRank = currentRank;
                 break;
             }
             currentRank++;
         }
-
         return new UserStatsDto(
                 win,
                 lose,

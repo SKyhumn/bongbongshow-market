@@ -35,7 +35,7 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
         http
                 .csrf(AbstractHttpConfigurer::disable)
-                .cors(cors -> cors.configurationSource(corsConfigurationSource())) //프론트 테스트
+                .cors(AbstractHttpConfigurer::disable)
 
                 .formLogin(AbstractHttpConfigurer::disable)
                 .httpBasic(AbstractHttpConfigurer::disable)
@@ -45,37 +45,18 @@ public class SecurityConfig {
                 )
 
                 .authorizeHttpRequests(auth -> auth
+                        .requestMatchers("/", "/index.html", "/assets/**", "/*.ico", "/*.json", "/*.svg", "/*.png", "/*.jpg").permitAll()
                         .requestMatchers("/api/public/**", "/signin").permitAll()
                         .requestMatchers("/api/user/**", "/hello").hasAnyRole("USER", "ADMIN")
                         .requestMatchers("/api/admin/**").hasRole("ADMIN")
                         .anyRequest().authenticated()
                 )
                 .exceptionHandling(exception -> exception
-                        .authenticationEntryPoint(((request, response, authException) ->  {
-                            response.sendRedirect("/signin");
-                        })))
-                .exceptionHandling(exception -> exception
-                        .authenticationEntryPoint(((request, response, authException) -> {
-                            response.sendRedirect("/signin");
-                        })))
-
+                        .authenticationEntryPoint((request, response, authException) -> {
+                            response.setStatus(401); // 강제 이동 대신 "권한 없음" 신호만 보냄
+                        }))
                 .addFilterBefore(new JwtAuthenticationFilter(tokenProvider),
                         UsernamePasswordAuthenticationFilter.class);
          return http.build();
-    }
-
-    //프톤트 테스트용 반드시 정식 릴리즈 땐 끄기
-    @Bean
-    public CorsConfigurationSource corsConfigurationSource(){
-        CorsConfiguration configuration = new CorsConfiguration();
-
-        configuration.setAllowedOrigins(List.of("http://localhost:5173",
-                "https://bongbong-market.shop"));
-        configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
-        configuration.setAllowedHeaders(List.of("*"));
-        configuration.setAllowCredentials(true);
-        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        source.registerCorsConfiguration("/**", configuration);
-        return source;
     }
 }

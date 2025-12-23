@@ -35,7 +35,7 @@ export default function Verify({value, onVerified}:VerifyProps){
         }
 
         try{
-            await axios.post("https://bongbong-market.shop/api/public/send-code",
+            await axios.post("/api/public/send-code",
                 data,
                 {
                     headers:{
@@ -61,7 +61,7 @@ export default function Verify({value, onVerified}:VerifyProps){
         }
 
         try{
-            await axios.post("https://bongbong-market.shop/api/public/verify-code",
+            await axios.post("/api/public/verify-code",
                 data,
                 {
                     withCredentials:true,

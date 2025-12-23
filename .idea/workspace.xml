@@ -5,47 +5,37 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4f42a369-c813-4a38-8d70-e2954340d5b6" name="변경" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitattributes" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gradle.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gradlew" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gradlew.bat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/settings.gradle" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/bongbongshowmarket/BongbongshowMarketApplication.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/bongbongshowmarket/config/SecurityConfig.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/bongbongshowmarket/controller/AdminController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/bongbongshowmarket/controller/GameController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/bongbongshowmarket/controller/MemberController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/bongbongshowmarket/controller/PageController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/bongbongshowmarket/controller/UserController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/bongbongshowmarket/dto/GameRequestDto.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/bongbongshowmarket/dto/LoginDto.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/bongbongshowmarket/dto/MemberDto.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/bongbongshowmarket/dto/RankDto.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/bongbongshowmarket/dto/TokenDto.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/bongbongshowmarket/dto/UserStatsDto.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/bongbongshowmarket/entitiy/EmailVerification.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/bongbongshowmarket/entitiy/GameRecord.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/bongbongshowmarket/entitiy/Role.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/bongbongshowmarket/entitiy/UserEntity.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/bongbongshowmarket/jwt/JwtAuthenticationFilter.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/bongbongshowmarket/jwt/JwtTokenProvider.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/bongbongshowmarket/repository/GameRecordRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/bongbongshowmarket/repository/UserRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/bongbongshowmarket/service/GameService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/bongbongshowmarket/service/MailService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/bongbongshowmarket/service/MemberService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/favicon.ico" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/hello.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/signin.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/org/example/bongbongshowmarket/BongbongshowMarketApplicationTests.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/org/example/bongbongshowmarket/service/GameServiceTest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/org/example/bongbongshowmarket/service/MemberServiceTest.java" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/main/java/org/example/bongbongshowmarket/controller/WebController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/main/resources/static/assets/index-Bgl7y63V.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/main/resources/static/assets/index-C_eLF50d.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/main/resources/static/back-btn.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/main/resources/static/default-profile.jpeg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/main/resources/static/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/main/resources/static/no-show.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/main/resources/static/show.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/main/resources/static/web-icon.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/org/example/bongbongshowmarket/config/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/org/example/bongbongshowmarket/config/SecurityConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/org/example/bongbongshowmarket/controller/PageController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/org/example/bongbongshowmarket/repository/GameRecordRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/org/example/bongbongshowmarket/repository/GameRecordRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/org/example/bongbongshowmarket/service/GameService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/org/example/bongbongshowmarket/service/GameService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/resources/static/favicon.ico" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/resources/templates/hello.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/resources/templates/signin.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/node_modules/.package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/node_modules/.package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/Common/BackButton.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/Common/BackButton.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/Home/Header.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/Home/Header.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/Home/Me.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/Home/Me.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/Home/Ranking.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/Home/Ranking.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/Modals/RankingModal.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/Modals/RankingModal.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/Verify/Verify.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/Verify/Verify.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/Verify/VerifyToResetPassword.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/Verify/VerifyToResetPassword.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/main.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/main.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/page/ResetPassword.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/page/ResetPassword.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/page/SignIn.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/page/SignIn.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/page/SignUp.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/page/SignUp.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -54,6 +44,9 @@
   </component>
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
+      <ProjectState />
+    </projectState>
+    <projectState path="$PROJECT_DIR$/backend">
       <ProjectState />
     </projectState>
   </component>
@@ -70,12 +63,30 @@
                 <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
                 <item name="bongbongshow-market" type="f1a62948:ProjectNode" />
               </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="bongbongshow-market" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="bongbongshow-market" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+                <item name="application" type="c8890929:TasksNode$1" />
+              </path>
             </expand>
             <select />
           </tree_state>
         </projects_view>
       </state>
     </system>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
@@ -102,23 +113,44 @@
   &quot;associatedIndex&quot;: 6
 }</component>
   <component name="ProjectId" id="37ESRmwy6Ixds7ftHQX8HqTFT72" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
+    &quot;Gradle.backend 빌드.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.bongbongshow-market [bootRun].executor&quot;: &quot;Run&quot;,
+    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;BackEnd&quot;,
+    &quot;Spring Boot.BongbongshowMarketApplication.executor&quot;: &quot;Run&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/Github/bongbongshow-market/backend/src/main/resources/static&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;D:\\Github\\bongbongshow-market\\frontend\\node_modules\\typescript\\lib&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Github\bongbongshow-market\backend\src\main\resources\static" />
+      <recent name="D:\Github\bongbongshow-market\frontend\dist" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\Github\bongbongshow-market\backend\src\main\resources\static" />
+    </key>
+  </component>
   <component name="RunManager" selected="Spring Boot.BongbongshowMarketApplication">
     <configuration name="GameServiceTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
@@ -216,44 +248,60 @@
       <RunAsTest>true</RunAsTest>
       <method v="2" />
     </configuration>
-    <configuration name="MemberServiceTest.signInSuccess" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="bongbongshow-market [bootRun]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
         <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="" />
+        <option name="scriptParameters" />
         <option name="taskDescriptions">
           <list />
         </option>
         <option name="taskNames">
           <list>
-            <option value=":test" />
-            <option value="--tests" />
-            <option value="&quot;org.example.bongbongshowmarket.service.MemberServiceTest.signInSuccess&quot;" />
+            <option value="bootRun" />
           </list>
         </option>
         <option name="vmOptions" />
       </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
       <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
       <DebugAllEnabled>false</DebugAllEnabled>
-      <RunAsTest>true</RunAsTest>
+      <RunAsTest>false</RunAsTest>
       <method v="2" />
     </configuration>
-    <configuration name="BongbongshowMarketApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
-      <module name="bongbongshow-market.main" />
+    <configuration name="BongbongshowMarketApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" activateToolWindowBeforeRun="false">
+      <envs>
+        <env name="EMAIL_USERNAME" value="pjsleey12312@gmail.com" />
+        <env name="JWT_SECURITY_KEY" value="8593b99a76d47ce65a5d7876aad324107f962efd57243eaaaf5233719f71db48b81fd7812647b15341b5249ebd2c5230c52ee712113227b844a281592f7fb004" />
+        <env name="password" value="1234" />
+        <env name="username" value="root" />
+        <env name="EMAIL_PASSWORD" value="fcyhyqfpenmnzqoz" />
+      </envs>
+      <option name="envFilePaths">
+        <option value="$PROJECT_DIR$/../../importFold/bongbongkey.pem" />
+      </option>
+      <module name="org.example.bongbongshow-market.main" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="org.example.bongbongshowmarket.BongbongshowMarketApplication" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <list>
+      <item itemvalue="Gradle.bongbongshow-market [bootRun]" />
+      <item itemvalue="Gradle.GameServiceTest" />
+      <item itemvalue="Gradle.GameServiceTest.testNullInput" />
+      <item itemvalue="Gradle.GameServiceTest.testRandom" />
+      <item itemvalue="Gradle.MemberServiceTest.emailInputNull" />
+      <item itemvalue="Spring Boot.BongbongshowMarketApplication" />
+    </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Gradle.bongbongshow-market [bootRun]" />
         <item itemvalue="Gradle.GameServiceTest" />
         <item itemvalue="Gradle.GameServiceTest.testRandom" />
         <item itemvalue="Gradle.GameServiceTest.testNullInput" />
         <item itemvalue="Gradle.MemberServiceTest.emailInputNull" />
-        <item itemvalue="Gradle.MemberServiceTest.signInSuccess" />
       </list>
     </recent_temporary>
   </component>

@@ -29,7 +29,7 @@ export default function Ranking(){
 
             try{
                 const res=await axios.get(
-                    "https://bongbong-market.shop/api/user/ranking",
+                    "/api/user/ranking",
                     {
                         withCredentials:true,
                         headers:{

@@ -1,4 +1,4 @@
-import type { BackButtonProps } from "../types/BackButtonProps";
+import type { BackButtonProps } from "../../types/BackButtonProps";
 
 export default function BackButton({onClick}:BackButtonProps){
 

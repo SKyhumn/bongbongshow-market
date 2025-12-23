@@ -39,7 +39,7 @@ export default function VerifyCodeForReseting({value, onVerified}:VerifyProps){
         }
 
         try{
-            await axios.post("https://bongbong-market.shop/api/public/send-reset-code",
+            await axios.post("/api/public/send-reset-code",
                 data,
                 {
                     headers:{
@@ -65,7 +65,7 @@ export default function VerifyCodeForReseting({value, onVerified}:VerifyProps){
         }
 
         try{
-            await axios.post("https://bongbong-market.shop/api/public/verify-code",
+            await axios.post("/api/public/verify-code",
                 data,
                 {
                     withCredentials:true,

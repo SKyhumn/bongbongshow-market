@@ -48,7 +48,7 @@ export default function SignUp(){
         }
 
         try{
-            await axios.post("https://bongbong-market.shop/api/public/signup",
+            await axios.post("/api/public/signup",
                 data,
                 {
                     withCredentials:true,

@@ -27,7 +27,7 @@ export default function RankingModal({ isOpen, func }: RankingModalProps) {
         const fetchData = async () => {
             try {
                 const res = await axios.get(
-                    "https://bongbong-market.shop/api/user/ranking/all", 
+                    "/api/user/ranking/all",
                     {
                         withCredentials: true,
                         headers:{ 
