@@ -74,7 +74,7 @@ export default function VerifyCodeForReseting(){
         <div className="reset-password">
             <BackButton onClick={goSignInPage}/>
             <form>
-                <h1>이메일 인증하기</h1>
+                <h1>비밀번호 재설정</h1>
                 <Email value={email} onChangeValue={(v)=>setEmail(v)}/>
                 <VerifyToResetPassword value={email} onVerified={()=>setVerified(true)}/>
                 {verified&&(
