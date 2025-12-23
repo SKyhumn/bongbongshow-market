@@ -4,9 +4,10 @@ import Email from "../components/Authentication/Email";
 import Password from "../components/Authentication/Password";
 import BackButton from "../components/Etc/BackButton";
 import Verify from "../components/Authentication/Verify";
+import Modal from "../components/Etc/Modal";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Modal from "../components/Etc/Modal";
+import type { SignUp } from "../types/SignUpType";
 
 export default function SignUp(){
     const [name, setName]=useState<string>('');
@@ -22,7 +23,7 @@ export default function SignUp(){
         return /^(?=.*[A-Za-z])(?=.*\d)(?=.*[!@#$%^&*]).{8,}$/.test(pw);
     }       
 
-    const isAlright=
+    const isAlright:boolean=
         name.trim()!==""&&
         verified&&
         password.trim()!=="";
@@ -40,7 +41,7 @@ export default function SignUp(){
             return;
         }
 
-        const data={
+        const data:SignUp={
             "email":`${email}@gsm.hs.kr`,
             "password":password,
             "name":name

@@ -1,16 +1,20 @@
 import axios from "axios";
 import Modal from "../Etc/Modal";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import type { VerifyProps } from "../../types/VerifyProps";
 
-export default function Verify({value, onVerified}:VerifyProps){
+export default function VerifyCodeForReseting({value, onVerified}:VerifyProps){
     const [isGsmEmail, setIsGsmEmail]=useState<boolean|null>(null);
     const [code, setCode]=useState<string>('');
     const [verified, setVerified]=useState<boolean>(false);
     const [isModalOpen, setIsModalOpen]=useState<boolean>(false);
     const [modalMessage, setModalMessage]=useState<string>('');
+    const [successed, setSuccessed]=useState<boolean>(false);
 
     const isEmailFulled:boolean=value.trim()!=="";
+
+    const nav=useNavigate();
 
     // 코드 받기 
     const receiveCode=async(e:React.MouseEvent<HTMLButtonElement>)=>{
@@ -35,7 +39,7 @@ export default function Verify({value, onVerified}:VerifyProps){
         }
 
         try{
-            await axios.post("https://bongbong-market.shop/api/public/send-code",
+            await axios.post("https://bongbong-market.shop/api/public/send-reset-code",
                 data,
                 {
                     headers:{
@@ -72,13 +76,16 @@ export default function Verify({value, onVerified}:VerifyProps){
             )
             onVerified();
             verifiedTrue();
+
             setIsModalOpen(true);
             setModalMessage('인증이 완료되었습니다.');
+            setSuccessed(true);
         } catch(err:any){
             setCode('');
             setIsGsmEmail(false);
             setIsModalOpen(true);
             setModalMessage('인증에 실패했습니다.');
+            setSuccessed(false);
         }
     }
 
@@ -86,6 +93,18 @@ export default function Verify({value, onVerified}:VerifyProps){
         setVerified(true);
         setIsGsmEmail(true);
     }
+
+    // 인증 성공 시 모달 닫고 비밀번호 재설정 페이지로
+    const success=()=>{
+        setIsModalOpen(false);
+        nav('/reset-password');
+    }
+
+    // 인증 실패 시 모달만 닫히기
+    const failed=()=>{
+        setIsModalOpen(false);
+    }
+
     return(
         <div className="verifying-box">
             <button
@@ -109,6 +128,7 @@ export default function Verify({value, onVerified}:VerifyProps){
                                 className="verifying-input"
                             />
                             <button 
+                                type="button"
                                 onClick={handleVerify} 
                                 disabled={verified} 
                                 className="verifying-btn"
@@ -123,7 +143,7 @@ export default function Verify({value, onVerified}:VerifyProps){
             <Modal 
                 message={modalMessage} 
                 isOpen={isModalOpen} 
-                func={()=>setIsModalOpen(false)}
+                func={successed?success:failed}
             />
         </div>
     );
