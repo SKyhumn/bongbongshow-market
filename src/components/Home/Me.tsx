@@ -119,7 +119,7 @@ export default function Me(){
                     variants={item}
                 >
                     <img 
-                        src={preview||user?.profileImage||"/default-profile.jpeg"} 
+                        src={preview||user?.profileImage||"../src/assets/img/default-profile.jpeg"} 
                         alt="profile"
                     />
                     <button 
@@ -144,7 +144,7 @@ export default function Me(){
                     variants={item}
                 >
                     <h4>내 순위</h4>
-                    <h1>{user?user?.rank:"-"}위</h1>
+                    <h1>{user?user?.rank:"0"}위</h1>
                 </motion.div>
                 
                 <motion.div 
@@ -153,15 +153,15 @@ export default function Me(){
                 >
                     <div className="win" key={user?.win}>
                         <h2>승</h2>
-                        <h3>{user?user?.win:"-"}</h3>
+                        <h3>{user?user?.win:"0"}</h3>
                     </div>
                     <div className="lose" key={user?.lose}>
                         <h2>패</h2>
-                        <h3>{user?user?.lose:"-"}</h3>
+                        <h3>{user?user?.lose:"0"}</h3>
                     </div>
                     <div className="draw" key={user?.draw}>
                         <h2>무</h2>
-                        <h3>{user?user?.draw:"-"}</h3>
+                        <h3>{user?user?.draw:"0"}</h3>
                     </div>
                 </motion.div>
             </div>

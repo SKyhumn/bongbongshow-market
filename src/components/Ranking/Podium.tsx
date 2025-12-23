@@ -7,7 +7,7 @@ interface PodiumProps {
 }
 
 const profileSrc=(img?:string)=>
-    img && img.trim() !== "" ? img : "/default-profile.jpeg";
+    img && img.trim() !== "" ? img : "../src/assets/img/default-profile.jpeg";
 
 export default function Podium({data}:PodiumProps){
     const first:RankingUser|undefined=data.find(u=>u.rank===1);

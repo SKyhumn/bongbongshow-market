@@ -18,7 +18,7 @@ export default function Top7({data}:Top7Props){
                 const profileSrc =
                     dt.profileImage && dt.profileImage.trim() !== ""
                     ? dt.profileImage
-                    : "/default-profile.jpeg";
+                    : "../src/assets/img/default-profile.jpeg";
 
                 return(
                     <div className="rank-item" key={dt.rank}>

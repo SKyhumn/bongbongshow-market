@@ -1,4 +1,4 @@
-# 봉봉쇼랭킹(로봇 가위바위보 유저 랭킹 웹앱)
+#(로봇 가위바위보 유저 랭킹 웹앱)
 
 AI 기반 로봇과 가위바위보를 즐기고  
 게임 결과와 승패 기록을 즉시 UI로 확인할 수 있는  
@@ -8,10 +8,10 @@ React 기반 인터랙티브 웹 애플리케이션입니다.
 
 메인페이지, 로그인, 회원가입 화면 예시입니다.
 
-![메인페이지](./src/assets/main.png)
-![로그인](./src/assets/sign-in.png)
-![회원가입](./src/assets/sign-up.png)
-![비밀번호 재설정](./src/assets/reset-password.png)
+![메인페이지](./src/assets/readme/main.png)
+![로그인](./src/assets/readme/sign-in.png)
+![회원가입](./src/assets/readme/sign-up.png)
+![비밀번호 재설정](./src/assets/readme/reset-password.png)
 
 ## ✨ Features
 

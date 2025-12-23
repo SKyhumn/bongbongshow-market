@@ -19,7 +19,7 @@ export default function Password({value, onChangeValue}:AuthProps){
             />
             <span>
                 <img 
-                    src={visibility?"no-show.svg":"show.svg"} 
+                    src={visibility?"../src/assets/icon/no-show.svg":"../src/assets/icon/show.svg"} 
                     onClick={handleVisibility}
                 />
             </span>
