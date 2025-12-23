@@ -53,4 +53,14 @@ public class UserController {
         memberService.updateProfileImage(user.getUsername(), file);
         return ResponseEntity.ok().body(Map.of("message", "프로필 이미지가 변경되었습니다."));
     }
+
+    @PostMapping("/qr/authorize")
+    public ResponseEntity<String> authorizeQr(@RequestBody Map<String, String> request,
+                                              @AuthenticationPrincipal UserDetails userDetails) {
+        String uuid = request.get("qrCode");
+        String email = userDetails.getUsername(); // 현재 핸드폰 로그인된 이메일
+        System.out.println(">>> [디버깅] 폰에서 승인 요청 옴! UUID: " + uuid + ", Email: " + email);
+        memberService.authorizeQrSession(uuid, email);
+        return ResponseEntity.ok("SUCCESS");
+    }
 }

@@ -17,13 +17,12 @@ import java.util.Map;
 @RequestMapping("/api/public")
 @RequiredArgsConstructor
 public class MemberController {
-    private final MemberService service;
     private final MemberService memberService;
 
     @PostMapping("/send-code")
     public ResponseEntity<String> sendCode(@RequestBody Map<String, String> body){
         String email = body.get("email");
-        service.sendCodeToEmail(email);
+        memberService.sendCodeToEmail(email);
         return ResponseEntity.ok("이메일로 인증코드를 전송하였습니다");
     }
 
@@ -32,7 +31,7 @@ public class MemberController {
         String email = body.get("email");
         String code = body.get("code");
 
-        boolean isVerified = service.verifyCode(email, code);
+        boolean isVerified = memberService.verifyCode(email, code);
 
         if (isVerified) {
             return ResponseEntity.ok("인증 성공!");
@@ -43,7 +42,7 @@ public class MemberController {
 
     @PostMapping("/signup")
     public ResponseEntity<String> createUser(@RequestBody MemberDto dto){
-        service.createUser(dto);
+        memberService.createUser(dto);
         return ResponseEntity.ok("회원가입 성공");
     }
 
@@ -88,6 +87,25 @@ public class MemberController {
             return ResponseEntity.ok("비밀번호가 성공적으로 변경되었습니다.");
         } catch (RuntimeException e) {
             return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
+    @GetMapping("/qr/init")
+    public ResponseEntity<String> initQr() {
+        return ResponseEntity.ok(memberService.startQrSession());
+    }
+
+    @GetMapping("/qr/poll")
+    public ResponseEntity<?> pollQr(@RequestParam String uuid) {
+        try {
+            TokenDto token = memberService.pollQrSession(uuid);
+            if (token != null) {
+                return ResponseEntity.ok(token); // 성공하면 토큰 줌
+            } else {
+                return ResponseEntity.ok("WAITING"); // 아직 안됨
+            }
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.status(400).body(e.getMessage());
         }
     }
 }

@@ -33,6 +33,56 @@ public class MemberService {
     private final Map<String, String> memoryStore = new ConcurrentHashMap<>();
     private final GameRecordRepository gameRecordRepository;
 
+    private final Map<String, QrSession> qrSessionStore = new ConcurrentHashMap<>();
+
+    private static class QrSession {
+        String status;
+        String email;
+        long createdAt;
+
+        public QrSession() {
+            this.status = "WAITING";
+            this.createdAt = System.currentTimeMillis();
+        }
+    }
+
+    public String startQrSession() {
+        String uuid = java.util.UUID.randomUUID().toString();
+        qrSessionStore.put(uuid, new QrSession());
+        return uuid;
+    }
+
+    public TokenDto pollQrSession(String uuid) {
+        QrSession session = qrSessionStore.get(uuid);
+        if (session == null) {
+            throw new IllegalArgumentException("유효하지 않은 QR 코드입니다.");
+        }
+        if (System.currentTimeMillis() - session.createdAt > 3 * 60 * 1000) {
+            qrSessionStore.remove(uuid);
+            throw new IllegalArgumentException("QR 코드가 만료되었습니다.");
+        }
+        if ("WAITING".equals(session.status)) {
+            return null;
+        }
+        if ("DONE".equals(session.status) && session.email != null) {
+            UserEntity user = repository.findByEmail(session.email)
+                    .orElseThrow(() -> new IllegalArgumentException("유저 정보 없음"));
+            TokenDto tokenDto = tokenProvider.createToken(user.getEmail(), user.getRole(), 1000 * 60 * 60);
+            qrSessionStore.remove(uuid);
+            return tokenDto;
+        }
+        return null;
+    }
+
+    public void authorizeQrSession(String uuid, String email) {
+        QrSession session = qrSessionStore.get(uuid);
+        if (session == null) {
+            throw new IllegalArgumentException("유효하지 않은 QR 코드입니다.");
+        }
+        session.status = "DONE";
+        session.email = email;
+    }
+
     public void sendCodeToEmail(String toEmail){
         if(repository.existsByEmail(toEmail)){
             throw new RuntimeException("이미 가입한 이메일 입니다");
