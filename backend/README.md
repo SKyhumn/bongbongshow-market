@@ -8,10 +8,10 @@ React 기반 인터랙티브 웹 애플리케이션입니다.
 
 메인페이지, 로그인, 회원가입 화면 예시입니다.
 
-![메인페이지](./src/assets/main.png)
-![로그인](./src/assets/sign-in.png)
-![회원가입](./src/assets/sign-up.png)
-![비밀번호 재설정](./src/assets/reset-password.png)
+![메인페이지](../frontend/src/assets/main.png)
+![로그인](../frontend/src/assets/sign-in.png)
+![회원가입](../frontend/src/assets/sign-up.png)
+![비밀번호 재설정](../frontend/src/assets/reset-password.png)
 
 ## ✨ Features
 
