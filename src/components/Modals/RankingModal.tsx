@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import type { RankingModalProps } from "../../types/RankingModalProps";
-import type { RankingUser } from "../../types/RankingUser";
+import type { RankingModalProps } from "../../types/Modal/RankingModalProps";
+import type { RankingUser } from "../../types/User/RankingUser";
 
 export default function RankingModal({ isOpen, func }: RankingModalProps) {
     const [data, setData] = useState<RankingUser[]>([]);

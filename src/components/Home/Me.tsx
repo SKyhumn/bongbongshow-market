@@ -2,11 +2,11 @@ import axios from "axios";
 import { useEffect } from "react";
 import { useState } from "react";
 import { useRef } from "react";
-import type { User } from "../../types/User";
+import type { User } from "../../types/User/User";
 import { container } from "../../animation/Animation";
 import { item } from "../../animation/Animation";
 import { motion } from "framer-motion";
-import Modal from "../Etc/Modal";
+import Modal from "../Modals/Modal";
 
 export default function Me(){
     const [user, setUser]=useState<User|null>(null);

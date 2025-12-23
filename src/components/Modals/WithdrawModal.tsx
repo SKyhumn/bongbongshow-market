@@ -1,4 +1,4 @@
-import type { SignOutModal } from "../../types/SignOutModalProps";
+import type { SignOutModal } from "../../types/Modal/SignOutModalProps";
 
 export default function WithDrawModal({isOpen, yesFunc, noFunc}:SignOutModal){
     if (!isOpen) return null;

@@ -1,4 +1,4 @@
-import type { RankingUser } from "../../types/RankingUser";
+import type { RankingUser } from "../../types/User/RankingUser";
 import { motion } from "framer-motion";
 import { item } from "../../animation/Animation";
 

@@ -1,7 +1,7 @@
 import axios from "axios";
-import Modal from "../Etc/Modal";
-import SignOutModal from "../Etc/SignOutModal";
-import WithDrawModal from "../Etc/WithdrawModal";
+import Modal from "../Modals/Modal";
+import SignOutModal from "../Modals/SignOutModal";
+import WithDrawModal from "../Modals/WithdrawModal";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 

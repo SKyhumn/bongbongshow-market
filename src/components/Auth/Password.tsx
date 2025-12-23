@@ -1,4 +1,4 @@
-import type { AuthProps } from "../../types/AuthProps";
+import type { AuthProps } from "../../types/Auth/AuthProps";
 import { useState } from "react";
 
 export default function Password({value, onChangeValue}:AuthProps){

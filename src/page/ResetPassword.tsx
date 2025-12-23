@@ -1,12 +1,12 @@
 import axios from "axios";
-import Email from "../components/Authentication/Email";
-import Password from "../components/Authentication/Password";
-import VerifyToResetPassword from "../components/Authentication/VerifyToResetPassword";
-import Modal from "../components/Etc/Modal";
-import BackButton from "../components/Etc/BackButton";
+import Email from "../components/Auth/Email";
+import Password from "../components/Auth/Password";
+import VerifyToResetPassword from "../components/Verify/VerifyToResetPassword";
+import Modal from "../components/Modals/Modal";
+import BackButton from "../components/Common/BackButton";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import type { ResetPasswordType } from "../types/ResetPasswordType";
+import type { ResetPasswordType } from "../types/Auth/ResetPasswordType";
 
 export default function VerifyCodeForReseting(){
     const [email, setEmail]=useState<string>('');
@@ -56,7 +56,7 @@ export default function VerifyCodeForReseting(){
             setSuccessed(true);
         } catch(err:any){
             setModalMessage("비밀번호 재설정에 실패했습니다.");
-            setIsModalOpen(false);
+            setIsModalOpen(true);
             setSuccessed(false);
         }
     }

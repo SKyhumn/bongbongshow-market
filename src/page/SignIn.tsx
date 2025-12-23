@@ -1,10 +1,10 @@
 import axios from "axios";
-import Email from "../components/Authentication/Email";
-import Password from "../components/Authentication/Password";
-import Modal from "../components/Etc/Modal";
+import Email from "../components/Auth/Email";
+import Password from "../components/Auth/Password";
+import Modal from "../components/Modals/Modal";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import type { SignIn } from "../types/SignInType";
+import type { SignIn } from "../types/Auth/SignInType";
 
 export default function SignIn(){
     const [email, setEmail]=useState<string>('');

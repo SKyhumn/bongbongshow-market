@@ -4,10 +4,10 @@ import Top7 from "../Ranking/Top7";
 import { useState } from "react";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import type { RankingUser } from "../../types/RankingUser";
+import type { RankingUser } from "../../types/User/RankingUser";
 import { motion } from "framer-motion";
 import { container } from "../../animation/Animation";
-import RankingModal from "../Etc/RankingModal";
+import RankingModal from "../Modals/RankingModal";
 
 
 export default function Ranking(){
