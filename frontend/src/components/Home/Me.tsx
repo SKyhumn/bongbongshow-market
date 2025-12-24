@@ -7,7 +7,6 @@ import { container } from "../../animation/Animation";
 import { item } from "../../animation/Animation";
 import { motion } from "framer-motion";
 import Modal from "../Modals/Modal";
-// ▼▼▼ 1. 라이브러리 추가 ▼▼▼
 import { QrReader } from "react-qr-reader";
 
 export default function Me(){
@@ -20,11 +19,9 @@ export default function Me(){
     const [uploading, setUploading] = useState(false);
     const fileInputRef = useRef<HTMLInputElement>(null);
 
-    // ▼▼▼ 2. QR 관련 상태 추가 ▼▼▼
     const [isQrOpen, setIsQrOpen] = useState<boolean>(false);
     const [isProcessingQr, setIsProcessingQr] = useState<boolean>(false);
 
-    // 내 정보 불러오기
     useEffect(()=>{
         const fetchMyInfo=async()=>{
             const token=localStorage.getItem("accessToken");
@@ -52,18 +49,14 @@ export default function Me(){
         return () => clearInterval(interval);
     },[]);
 
-
-    // 로딩 중...
     if (isLoading) {
         return <div className="me">로딩 중...</div>
     }
 
-    // 로딩 실패
     if (error) {
         return <div className="me">{error}</div>
     }
 
-    // 프로필 사진 바꾸기
     const handleImgChange=(e: React.ChangeEvent<HTMLInputElement>)=>{
         const file = e.target.files?.[0];
         if (!file || !user) return;
@@ -111,7 +104,6 @@ export default function Me(){
         }
     }
 
-    // ▼▼▼ 3. QR 스캔 핸들러 추가 ▼▼▼
     const handleScan = async (result: any) => {
         if (result && !isProcessingQr) {
             setIsProcessingQr(true);
@@ -151,32 +143,29 @@ export default function Me(){
                 <motion.div
                     className="changing-avatar"
                     variants={item}
+                    style={{display:'flex', flexDirection:'column', alignItems:'center', gap:'10px'}}
                 >
                     <img
                         src={preview||user?.profileImage||"/default-profile.jpeg"}
                         alt="profile"
                     />
 
-                    {/* 버튼들을 세로로 정렬하기 위한 div */}
-                    <div style={{display:'flex', flexDirection:'column', gap:'10px'}}>
-                        <button
-                            className="blue-btn"
-                            onClick={()=>fileInputRef.current?.click()}
-                            disabled={uploading}
-                        >
-                            {uploading?"업로드 중...":"프로필 사진 변경"}
-                        </button>
+                    <button
+                        className="blue-btn"
+                        onClick={()=>fileInputRef.current?.click()}
+                        disabled={uploading}
+                        style={{width:'100%', maxWidth:'200px'}}
+                    >
+                        {uploading?"업로드 중...":"프로필 사진 변경"}
+                    </button>
 
-                        {/* ▼▼▼ 4. QR 버튼 추가 ▼▼▼ */}
-                        <button
-                            className="blue-btn"
-                            style={{backgroundColor: '#ff6b6b'}}
-                            onClick={() => setIsQrOpen(true)}
-                        >
-                            📷 QR 로그인
-                        </button>
-                    </div>
-
+                    <button
+                        className="blue-btn"
+                        style={{backgroundColor: '#ff6b6b', width:'100%', maxWidth:'200px'}}
+                        onClick={() => setIsQrOpen(true)}
+                    >
+                        📷 QR 로그인
+                    </button>
                 </motion.div>
 
                 <input
@@ -214,7 +203,6 @@ export default function Me(){
                 </motion.div>
             </div>
 
-            {/* ▼▼▼ 5. QR 스캐너 화면 추가 ▼▼▼ */}
             {isQrOpen && (
                 <div style={{
                     position: 'fixed', top: 0, left: 0, width: '100%', height: '100%',
@@ -226,7 +214,7 @@ export default function Me(){
                         <QrReader
                             onResult={handleScan}
                             constraints={{
-                                facingMode: { ideal: 'environment' }  // 또는 'user' 대신 이렇게
+                                facingMode: { ideal: 'environment' }
                             }}
                             videoId="video"
                             scanDelay={500}
