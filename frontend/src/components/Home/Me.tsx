@@ -143,29 +143,30 @@ export default function Me(){
                 <motion.div
                     className="changing-avatar"
                     variants={item}
-                    style={{display:'flex', flexDirection:'column', alignItems:'center', gap:'10px'}}
                 >
                     <img
                         src={preview||user?.profileImage||"/default-profile.jpeg"}
                         alt="profile"
                     />
 
-                    <button
-                        className="blue-btn"
-                        onClick={()=>fileInputRef.current?.click()}
-                        disabled={uploading}
-                        style={{width:'100%', maxWidth:'200px'}}
-                    >
-                        {uploading?"업로드 중...":"프로필 사진 변경"}
-                    </button>
+                    <div style={{display:'flex', flexDirection:'column', alignItems:'center', gap:'10px', width:'100%'}}>
+                        <button
+                            className="blue-btn"
+                            onClick={()=>fileInputRef.current?.click()}
+                            disabled={uploading}
+                            style={{width:'100%', maxWidth:'200px'}}
+                        >
+                            {uploading?"업로드 중...":"프로필 사진 변경"}
+                        </button>
 
-                    <button
-                        className="blue-btn"
-                        style={{backgroundColor: '#ff6b6b', width:'100%', maxWidth:'200px'}}
-                        onClick={() => setIsQrOpen(true)}
-                    >
-                        📷 QR 로그인
-                    </button>
+                        <button
+                            className="blue-btn"
+                            style={{backgroundColor: '#ff6b6b', width:'100%', maxWidth:'200px'}}
+                            onClick={() => setIsQrOpen(true)}
+                        >
+                            📷 QR 로그인
+                        </button>
+                    </div>
                 </motion.div>
 
                 <input
