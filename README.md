@@ -31,7 +31,7 @@ React 기반 인터랙티브 웹 애플리케이션입니다.
 - CSS / Framer Motion: UI 스타일링 및 애니메이션 구현
 - Spring Boot: Rest API 구현 및 DB 저장
 - Python: 구글 손 인식 API를 가지고 와서 Spring 서버에 보내기
-- AWS E2C: 서버 배포용
+- AWS EC2: 서버 배포용
 
 ## ⚙️ User Flow
 
