@@ -8,10 +8,10 @@ React 기반 인터랙티브 웹 애플리케이션입니다.
 
 메인페이지, 로그인, 회원가입 화면 예시입니다.
 
-![메인페이지](../frontend/src/assets/main.png)
-![로그인](../frontend/src/assets/sign-in.png)
-![회원가입](../frontend/src/assets/sign-up.png)
-![비밀번호 재설정](../frontend/src/assets/reset-password.png)
+![메인페이지](https://github.com/SKyhumn/bongbongshow-market/blob/main/frontend/src/assets/main.png)
+![로그인](https://github.com/SKyhumn/bongbongshow-market/blob/main/frontend/src/assets/sign-in.png)
+![회원가입](https://github.com/SKyhumn/bongbongshow-market/blob/main/frontend/src/assets/sign-up.png)
+![비밀번호 재설정](https://github.com/SKyhumn/bongbongshow-market/blob/main/frontend/src/assets/reset-password.png)
 
 ## ✨ Features
 
@@ -19,6 +19,7 @@ React 기반 인터랙티브 웹 애플리케이션입니다.
 - 로그인 후 자기 순위 확인 가능
 - 회원가입 및 비밀번호 재설정 가능
 - 프론트엔드에서 유저 순위 실시간 업데이트 및 UI 반영
+- 파이썬을 활용하여 유저의 손 실시간 인식 후 서버로 유저의 손 정보 보내기
   
 ## 🛠️ Tech Stack
 
@@ -28,6 +29,8 @@ React 기반 인터랙티브 웹 애플리케이션입니다.
 - React Router Dom: 페이지 전환
 - Axios: 서버와 데이터 송수신
 - CSS / Framer Motion: UI 스타일링 및 애니메이션 구현
+- Spring Boot: Rest API 구현 및 DB 저장
+- Python: 구글 손 인식 API를 가지고 와서 Spring 서버에 보내기
 
 ## ⚙️ User Flow
 
