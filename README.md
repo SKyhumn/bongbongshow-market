@@ -24,14 +24,18 @@ React 기반 인터랙티브 웹 애플리케이션입니다.
 
 로그인 => 전적 확인 및 랭킹 확인 => 타 기기의 게임 프로그램에 있는 QR코드 인증 => 로봇이랑 가위바위보 시작 & 타 기기에서 AI가 사용자 손 동작을 인식
   
-## 🛠️ Tech Stack
+## 🛠️ 기술 스택
 
-- Vite: 빠른 개발 환경 구성과 빠른 HMR 지원
-- React: 상태 변화에 따른 UI 렌더링
-- TypeScript: 데이터 타입 지정 및 버그 최소화
-- React Router Dom: 페이지 전환
-- Axios: 서버와 데이터 송수신
-- CSS / Framer Motion: UI 스타일링 및 애니메이션 구현
+- **Client Development**
+  
+    ![React](https://img.shields.io/badge/react-%2361DAFB?style=for-the-badge&logo=react&logoColor=black)
+    ![TypeScript](https://img.shields.io/badge/typescript-%233178C6?style=for-the-badge&logo=typescript&logoColor=white)
+    ![HTML5](https://img.shields.io/badge/html5-%23E34F26?style=for-the-badge&logo=html5&logoColor=white)
+    ![CSS](https://img.shields.io/badge/CSS-663399?style=for-the-badge&logo=css&logoColor=white)
+    
+- **Server Development**
+
+  
 - Spring Boot: Rest API 구현 및 DB 저장
 - Python: 구글 손 인식 API를 가지고 와서 Spring 서버에 보내기
 - AWS EC2: 서버 배포용
