@@ -10,9 +10,8 @@ React 기반 인터랙티브 웹 애플리케이션입니다.
 
 ## 🚀 주요 배경
 
+- 메인페이지
 ![메인페이지](https://github.com/SKyhumn/bongbongshow-market/blob/main/frontend/src/assets/main.png)
-
-메인페이지
 
 ## ✨ Features
 
