@@ -4,14 +4,15 @@ AI 기반 로봇과 가위바위보를 즐기고
 게임 결과와 승패 기록을 즉시 UI로 확인할 수 있는  
 React 기반 인터랙티브 웹 애플리케이션입니다.
 
-## 💻 preview
+## 💡 기획 배경
+웹 프론트엔드 개발자 + 웹 백엔드/AI 개발자 + 하드웨어 개발자 + 게임 기획/개발자가 모여서
+사용자가 로봇과 가위바위보 해서 승부를 가리고 웹 화면에 사용자 전적과 랭킹을 띄우도록 구현했습니다.
 
-메인페이지, 로그인, 회원가입 화면 예시입니다.
+## 🚀 주요 배경
 
 ![메인페이지](https://github.com/SKyhumn/bongbongshow-market/blob/main/frontend/src/assets/main.png)
-![로그인](https://github.com/SKyhumn/bongbongshow-market/blob/main/frontend/src/assets/sign-in.png)
-![회원가입](https://github.com/SKyhumn/bongbongshow-market/blob/main/frontend/src/assets/sign-up.png)
-![비밀번호 재설정](https://github.com/SKyhumn/bongbongshow-market/blob/main/frontend/src/assets/reset-password.png)
+
+메인페이지
 
 ## ✨ Features
 
