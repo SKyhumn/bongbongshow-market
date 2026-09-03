@@ -35,9 +35,17 @@ React 기반 인터랙티브 웹 애플리케이션입니다.
     
 - **Server Development**
 
+    ![Spring](https://img.shields.io/badge/Spring%20Boot-6DB33F?style=for-the-badge&logo=springboot&logoColor=white)
+    ![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white)
+
+- **Developement Tools**
   
-- Spring Boot: Rest API 구현 및 DB 저장
-- Python: 구글 손 인식 API를 가지고 와서 Spring 서버에 보내기
+    ![Vite](https://img.shields.io/badge/Vite-9135FF?style=for-the-badge&logo=vite&logoColor=white)
+    ![Git](https://img.shields.io/badge/Git-F03C2E?style=for-the-badge&logo=git&logoColor=white)
+    ![GitHub](https://img.shields.io/badge/GitHub-%23181717?style=for-the-badge&logo=github&logoColor=white)
+
+- **Deploy**
+
 - AWS EC2: 서버 배포용
 
 ## ⚙️ User Flow
