@@ -46,7 +46,7 @@ React 기반 인터랙티브 웹 애플리케이션입니다.
 
 - **Deploy**
 
-- AWS EC2: 서버 배포용
+  - AWS EC2: 서버 배포용
 
 ## ⚙️ User Flow
 
