@@ -12,7 +12,7 @@ React 기반 인터랙티브 웹 애플리케이션입니다.
 
 - **메인페이지**
 
-![메인페이지](./src/images/readme/main.png)
+![메인페이지](https://github.com/SKyhumn/bongbongshow-market/blob/main/frontend/src/assets/main.png)
 
 - 가위바위보 후 내 전적 확인하기
 - 사용자 전적 랭킹 확인
@@ -22,8 +22,10 @@ React 기반 인터랙티브 웹 애플리케이션입니다.
 
 ## 🧭 서비스 흐름
 
+```
 로그인 => 전적 확인 및 랭킹 확인 => 타 기기의 게임 프로그램에 있는 QR코드 인증 => 로봇이랑 가위바위보 시작 & 타 기기에서 AI가 사용자 손 동작을 인식
-  
+```
+
 ## 🛠️ 기술 스택
 
 - **Client Development**
@@ -59,4 +61,3 @@ React 기반 인터랙티브 웹 애플리케이션입니다.
 
 - 모바일 사용자를 위한 반응형 UI 개선
 - 사용자 편의를 위한 UI 개선
-
